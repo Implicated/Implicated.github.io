@@ -510,7 +510,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    786
+                    841
                 </div>
                 
 
@@ -544,7 +544,7 @@
 <a id="more"></a>
 
 <hr>
-<h2 id="postgreSQL"><a href="#postgreSQL" class="headerlink" title="postgreSQL"></a>postgreSQL</h2><h4 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h4><table>
+<h3 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h3><table>
 <thead>
 <tr>
 <th align="left">软件</th>
@@ -560,7 +560,7 @@
 <td align="left">13</td>
 </tr>
 </tbody></table>
-<h4 id="安装postgreSQL"><a href="#安装postgreSQL" class="headerlink" title="安装postgreSQL"></a>安装postgreSQL</h4><p>CentOS 7 自带了<code>9.2.24</code>版本，本文安装最新的<code>13</code>版本</p>
+<h3 id="安装postgreSQL"><a href="#安装postgreSQL" class="headerlink" title="安装postgreSQL"></a>安装postgreSQL</h3><p>CentOS 7 自带了<code>9.2.24</code>版本，本文安装最新的<code>13</code>版本</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">yum search postgresql-s
 
 ================================================================= N/S matched: postgresql-s ==================================================================
@@ -601,7 +601,7 @@ Description : PostgreSQL is an advanced Object-Relational database management sy
 <ol start="4">
 <li>安装完成后会建立一个名叫<code>postgres</code>的linux用户（默认密码为空），和自带3个数据库<code>postgres</code>、<code>template0</code>、<code>template1</code></li>
 </ol>
-<h4 id="配置postgreSQL"><a href="#配置postgreSQL" class="headerlink" title="配置postgreSQL"></a>配置postgreSQL</h4><ol>
+<h3 id="配置postgreSQL"><a href="#配置postgreSQL" class="headerlink" title="配置postgreSQL"></a>配置postgreSQL</h3><ol>
 <li>启动PostgreSQL服务，并配置为其能够在系统启动时启动</li>
 </ol>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sudo systemctl enable postgresql-13
@@ -632,7 +632,7 @@ May 09 15:03:33 FC systemd[1]: Starting PostgreSQL 13 database server...
 May 09 15:03:33 FC postmaster[20045]: 2021-05-09 15:03:33.677 CST [20045] LOG:  redirecting log output to logging collector process
 May 09 15:03:33 FC postmaster[20045]: 2021-05-09 15:03:33.677 CST [20045] HINT:  Future log output will appear in directory "log".
 May 09 15:03:33 FC systemd[1]: Started PostgreSQL 13 database server.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="开启远程访问"><a href="#开启远程访问" class="headerlink" title="开启远程访问"></a>开启远程访问</h4><ol>
+<h3 id="开启远程访问"><a href="#开启远程访问" class="headerlink" title="开启远程访问"></a>开启远程访问</h3><ol>
 <li>修改postgresql.conf</li>
 </ol>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sudo vi /var/lib/pgsql/data/postgresql.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -644,16 +644,29 @@ May 09 15:03:33 FC systemd[1]: Started PostgreSQL 13 database server.<span aria-
 <p>在文件末尾添加<code>host all all 0.0.0.0/0 md5</code></p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># TYPE  DATABASE  USER  CIDR-ADDRESS  METHOD
 host  all  all 0.0.0.0/0 md5<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><ol>
+<ol start="3">
+<li>解决解决<code>root</code>用户下无法通过<code>psql -U postgres</code>登录的问题</li>
+</ol>
+<p>修改pg_hba.conf</p>
+<pre class="line-numbers language-conf" data-language="conf"><code class="language-conf"># 修改前
+local    all    all    peer
+# 修改后
+local    all    all    trust<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><ol>
 <li>登录postgres用户，并登录数据库终端</li>
 </ol>
-<pre class="line-numbers language-none"><code class="language-none">su postgres
-psql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 登录postgres使用
+su postgres
+psql
+# 直接使用 
+psql -U postgres<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ol start="2">
 <li>修改密码</li>
 </ol>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">alter</span> <span class="token keyword">user</span> postgres <span class="token keyword">with</span> password <span class="token string">'NewPassword'</span><span class="token punctuation">;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment"># 方法一</span>
+<span class="token keyword">alter</span> <span class="token keyword">user</span> postgres <span class="token keyword">with</span> password <span class="token string">'NewPassword'</span><span class="token punctuation">;</span> 
+<span class="token comment"># 方法二</span>
+\password<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ol start="3">
 <li>查看版本</li>
 </ol>

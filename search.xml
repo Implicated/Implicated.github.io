@@ -726,7 +726,7 @@ killall mysqld  #结束进程(重复使用这条命令，知道没有MySQL进程
 <a id="more"></a>
 
 <hr>
-<h2 id="postgreSQL"><a href="#postgreSQL" class="headerlink" title="postgreSQL"></a>postgreSQL</h2><h4 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h4><table>
+<h3 id="环境信息"><a href="#环境信息" class="headerlink" title="环境信息"></a>环境信息</h3><table>
 <thead>
 <tr>
 <th align="left">软件</th>
@@ -742,7 +742,7 @@ killall mysqld  #结束进程(重复使用这条命令，知道没有MySQL进程
 <td align="left">13</td>
 </tr>
 </tbody></table>
-<h4 id="安装postgreSQL"><a href="#安装postgreSQL" class="headerlink" title="安装postgreSQL"></a>安装postgreSQL</h4><p>CentOS 7 自带了<code>9.2.24</code>版本，本文安装最新的<code>13</code>版本</p>
+<h3 id="安装postgreSQL"><a href="#安装postgreSQL" class="headerlink" title="安装postgreSQL"></a>安装postgreSQL</h3><p>CentOS 7 自带了<code>9.2.24</code>版本，本文安装最新的<code>13</code>版本</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">yum search postgresql-s
 
 ================================================================= N/S matched: postgresql-s ==================================================================
@@ -783,7 +783,7 @@ Description : PostgreSQL is an advanced Object-Relational database management sy
 <ol start="4">
 <li>安装完成后会建立一个名叫<code>postgres</code>的linux用户（默认密码为空），和自带3个数据库<code>postgres</code>、<code>template0</code>、<code>template1</code></li>
 </ol>
-<h4 id="配置postgreSQL"><a href="#配置postgreSQL" class="headerlink" title="配置postgreSQL"></a>配置postgreSQL</h4><ol>
+<h3 id="配置postgreSQL"><a href="#配置postgreSQL" class="headerlink" title="配置postgreSQL"></a>配置postgreSQL</h3><ol>
 <li>启动PostgreSQL服务，并配置为其能够在系统启动时启动</li>
 </ol>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sudo systemctl enable postgresql-13
@@ -814,7 +814,7 @@ May 09 15:03:33 FC systemd[1]: Starting PostgreSQL 13 database server...
 May 09 15:03:33 FC postmaster[20045]: 2021-05-09 15:03:33.677 CST [20045] LOG:  redirecting log output to logging collector process
 May 09 15:03:33 FC postmaster[20045]: 2021-05-09 15:03:33.677 CST [20045] HINT:  Future log output will appear in directory "log".
 May 09 15:03:33 FC systemd[1]: Started PostgreSQL 13 database server.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="开启远程访问"><a href="#开启远程访问" class="headerlink" title="开启远程访问"></a>开启远程访问</h4><ol>
+<h3 id="开启远程访问"><a href="#开启远程访问" class="headerlink" title="开启远程访问"></a>开启远程访问</h3><ol>
 <li>修改postgresql.conf</li>
 </ol>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sudo vi /var/lib/pgsql/data/postgresql.conf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -826,16 +826,29 @@ May 09 15:03:33 FC systemd[1]: Started PostgreSQL 13 database server.<span aria-
 <p>在文件末尾添加<code>host all all 0.0.0.0/0 md5</code></p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># TYPE  DATABASE  USER  CIDR-ADDRESS  METHOD
 host  all  all 0.0.0.0/0 md5<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h4 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h4><ol>
+<ol start="3">
+<li>解决解决<code>root</code>用户下无法通过<code>psql -U postgres</code>登录的问题</li>
+</ol>
+<p>修改pg_hba.conf</p>
+<pre class="line-numbers language-conf" data-language="conf"><code class="language-conf"># 修改前
+local    all    all    peer
+# 修改后
+local    all    all    trust<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><ol>
 <li>登录postgres用户，并登录数据库终端</li>
 </ol>
-<pre class="line-numbers language-none"><code class="language-none">su postgres
-psql<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 登录postgres使用
+su postgres
+psql
+# 直接使用 
+psql -U postgres<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ol start="2">
 <li>修改密码</li>
 </ol>
-<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">alter</span> <span class="token keyword">user</span> postgres <span class="token keyword">with</span> password <span class="token string">'NewPassword'</span><span class="token punctuation">;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment"># 方法一</span>
+<span class="token keyword">alter</span> <span class="token keyword">user</span> postgres <span class="token keyword">with</span> password <span class="token string">'NewPassword'</span><span class="token punctuation">;</span> 
+<span class="token comment"># 方法二</span>
+\password<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ol start="3">
 <li>查看版本</li>
 </ol>
@@ -3420,7 +3433,7 @@ npm config set cache "E://nodejs/node_cache"<span aria-hidden="true" class="line
 <h2 id="配置淘宝源"><a href="#配置淘宝源" class="headerlink" title="配置淘宝源"></a>配置淘宝源</h2><a href="/2021/04/22/mirror/" title="点击查看如何配置">点击查看如何配置</a>
 ]]></content>
       <categories>
-        <category>be</category>
+        <category>fe</category>
       </categories>
       <tags>
         <tag>js</tag>
@@ -4341,7 +4354,7 @@ ps -ef|grep weblogic|grep -v grep<span aria-hidden="true" class="line-numbers-ro
 <tr>
 <td align="left">IDE Settings</td>
 <td align="left">IDE Settings Sync</td>
-<td align="left">使用JB帐号同步idea设置</td>
+<td align="left">使用JetBrains帐号同步idea设置</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4401,13 +4414,13 @@ ps -ef|grep weblogic|grep -v grep<span aria-hidden="true" class="line-numbers-ro
 <tr>
 <td align="left">JVM Frameworks</td>
 <td align="left">Arquillian</td>
-<td align="left"></td>
+<td align="left">增加了对Arquillian（Java微服务的测试框架）的支持。</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">JVM Frameworks</td>
 <td align="left">AspectJ</td>
-<td align="left"></td>
+<td align="left">AspectJ静态代理</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4419,19 +4432,19 @@ ps -ef|grep weblogic|grep -v grep<span aria-hidden="true" class="line-numbers-ro
 <tr>
 <td align="left">JVM Frameworks</td>
 <td align="left">Grails</td>
-<td align="left"></td>
+<td align="left">一个强大的基于Groovy的Web应用程序框架</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">JVM Frameworks</td>
 <td align="left">Guice</td>
-<td align="left"></td>
+<td align="left">Google提供给您的Java 6及更高版本的轻量级依赖注入框架</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">JVM Frameworks</td>
 <td align="left">Helidon</td>
-<td align="left"></td>
+<td align="left">Oracle在2018年9月推出的轻量级微服务框架</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4527,25 +4540,25 @@ ps -ef|grep weblogic|grep -v grep<span aria-hidden="true" class="line-numbers-ro
 <tr>
 <td align="left">JVM Frameworks</td>
 <td align="left">JavaFX</td>
-<td align="left"></td>
+<td align="left">JavaFX脚本支持</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">JVM Frameworks</td>
 <td align="left">Micronaut</td>
-<td align="left"></td>
+<td align="left">Micronaut 是一个现代化的基于 JVM 的全栈框架，用于构建模块化且易于测试的微服务或无服务程序</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">JVM Frameworks</td>
 <td align="left">Quarkus</td>
-<td align="left"></td>
+<td align="left">Red Hat开源的Java框架Quarkus，定位为GraalVM和OpenJDK HotSpot量身定制的一个Kurbernetes Native Java框架</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">JVM Frameworks</td>
 <td align="left">Reactive Streams</td>
-<td align="left"></td>
+<td align="left">反应式流，一个Java异步框架</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4623,13 +4636,13 @@ ps -ef|grep weblogic|grep -v grep<span aria-hidden="true" class="line-numbers-ro
 <tr>
 <td align="left">Languages</td>
 <td align="left">Gherkin</td>
-<td align="left"></td>
+<td align="left">Cucumber脚本语言</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Languages</td>
 <td align="left">Groovy</td>
-<td align="left">IDEA基本脚本语言</td>
+<td align="left">脚本语言</td>
 <td align="left">✓</td>
 </tr>
 <tr>
@@ -4647,13 +4660,13 @@ ps -ef|grep weblogic|grep -v grep<span aria-hidden="true" class="line-numbers-ro
 <tr>
 <td align="left">Languages</td>
 <td align="left">Resource Bundle Editor</td>
-<td align="left"></td>
+<td align="left">.properties编译器</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Languages</td>
 <td align="left">Shell Script</td>
-<td align="left"></td>
+<td align="left">shell脚本支持增强</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4701,67 +4714,67 @@ ps -ef|grep weblogic|grep -v grep<span aria-hidden="true" class="line-numbers-ro
 <tr>
 <td align="left">Swing</td>
 <td align="left">UI Designer</td>
-<td align="left"></td>
+<td align="left">一个Java的GUI工具包</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Template Languages</td>
 <td align="left">FreeMarker</td>
-<td align="left"></td>
+<td align="left">Apache FreeMarker™是一个模板引擎</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Template Languages</td>
 <td align="left">Haml</td>
-<td align="left"></td>
+<td align="left">HTML抽象标记语言</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Template Languages</td>
 <td align="left">Java Server Pages(jsp)</td>
-<td align="left">JSP</td>
+<td align="left">JSP模板</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Template Languages</td>
 <td align="left">Thymeleaf</td>
-<td align="left">SpringBoot JSP模板</td>
+<td align="left">Thymeleaf模板引擎</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Template Languages</td>
 <td align="left">Velocity</td>
-<td align="left"></td>
+<td align="left">Velocity模板引擎</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Test Tools</td>
 <td align="left">Cucumber for Groovy</td>
-<td align="left"></td>
+<td align="left">Cucumber<a href="https://cucumber.io/">支持行为驱动开发的软件工具</a></td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Test Tools</td>
 <td align="left">Cucumber for Java</td>
-<td align="left"></td>
+<td align="left">Cucumber<a href="https://cucumber.io/">支持行为驱动开发的软件工具</a></td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Test Tools</td>
 <td align="left">Junit</td>
-<td align="left"></td>
+<td align="left">支持Junit测试框架</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Test Tools</td>
 <td align="left">TestNG</td>
-<td align="left"></td>
+<td align="left">支持TestNG测试框架</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Themes</td>
 <td align="left">Windows 10 Light Theme</td>
-<td align="left">明亮主题</td>
+<td align="left">Windows 10明亮主题</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4773,7 +4786,7 @@ ps -ef|grep weblogic|grep -v grep<span aria-hidden="true" class="line-numbers-ro
 <tr>
 <td align="left">Version Controls</td>
 <td align="left">ChangeReminder</td>
-<td align="left"></td>
+<td align="left">根据提交历史记录来预测您可能忘记修改的文件。支持Git</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4791,13 +4804,13 @@ ps -ef|grep weblogic|grep -v grep<span aria-hidden="true" class="line-numbers-ro
 <tr>
 <td align="left">Version Controls</td>
 <td align="left">Mercurial</td>
-<td align="left"></td>
+<td align="left">跨平台的分布式版本控制软件，主要由Python语言实现，但也包含用C语言实现的二进制比较工具</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Version Controls</td>
 <td align="left">Perforce Helix Core</td>
-<td align="left"></td>
+<td align="left">支持二进制文件或图形的集中式版本控制系统</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4809,7 +4822,7 @@ ps -ef|grep weblogic|grep -v grep<span aria-hidden="true" class="line-numbers-ro
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">ByteCode Viewer</td>
-<td align="left"></td>
+<td align="left">字节码查看器（支持已编译的，target目录 View-&gt;Show Bytecode）</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4821,13 +4834,13 @@ ps -ef|grep weblogic|grep -v grep<span aria-hidden="true" class="line-numbers-ro
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Copyright</td>
-<td align="left"></td>
+<td align="left"><a href="https://blog.csdn.net/ab84120966/article/details/90239450">版权信息插件</a></td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Debugger Support for JSP(Jsr45)</td>
-<td align="left"></td>
+<td align="left">JSP debug支持</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4839,61 +4852,61 @@ ps -ef|grep weblogic|grep -v grep<span aria-hidden="true" class="line-numbers-ro
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Diagrams</td>
-<td align="left"></td>
+<td align="left">UML类图支持</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Eclipse Interoperability</td>
-<td align="left"></td>
+<td align="left">Eclipse相互支持</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">EditorConfig</td>
-<td align="left"></td>
+<td align="left"><a href="https://editorconfig.org/#overview">跨IDE的统一编码风格支持</a></td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Grazie</td>
-<td align="left"></td>
+<td align="left">智能拼写和语法检查</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Http Clients</td>
-<td align="left"></td>
+<td align="left">类型postman</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">IDE Features Trainer</td>
-<td align="left"></td>
+<td align="left">IDEA基本功能学习</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">IntelliLang</td>
-<td align="left"></td>
+<td align="left">语言注入功能</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Java Bytecode Decompiler</td>
-<td align="left"></td>
+<td align="left">Java反编译</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Java Internationalization</td>
-<td align="left"></td>
+<td align="left">Java国际化支持</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Java Stream Debugger</td>
-<td align="left"></td>
+<td align="left">streamAPI debug支持</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -4905,79 +4918,79 @@ ps -ef|grep weblogic|grep -v grep<span aria-hidden="true" class="line-numbers-ro
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Machine Learning Code Completion</td>
-<td align="left"></td>
+<td align="left">基于机器学习优化代码提示</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Next File Prediction</td>
-<td align="left"></td>
+<td align="left">预测将在IDE中打开的下一个文件，以开始长期运行的分析和预加载缓存。</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">OpenAPI Specifications</td>
-<td align="left"></td>
+<td align="left">OpenAPI和Swagger规范文件支持。</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Performance Testing</td>
-<td align="left">基于Gradle</td>
+<td align="left">基于Gradle，自动化测试</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Project Shared Indexing</td>
-<td align="left"></td>
+<td align="left"><a href="https://www.jetbrains.com/help/idea/shared-indexes.html#shared-jdk-indexes">共享索引</a></td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Recommenders for Java and Python</td>
-<td align="left"></td>
+<td align="left">Java 和 Python的上下文提示增强</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Space</td>
-<td align="left"></td>
+<td align="left">项目管理工具（包含 CI/CD 工具 TeamCity）</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Tasks Management</td>
-<td align="left"></td>
+<td align="left">任务功能插件</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Terminal</td>
-<td align="left"></td>
+<td align="left">终端</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Textmate Bundles</td>
-<td align="left"></td>
+<td align="left">代码高亮</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Time Tracking</td>
-<td align="left"></td>
+<td align="left">任务功能插件的时间跟踪</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Webp Support</td>
-<td align="left"></td>
+<td align="left">.webp图片格式支持</td>
 <td align="left"></td>
 </tr>
 <tr>
 <td align="left">Other Tools</td>
 <td align="left">Zkm-Unscramble</td>
-<td align="left"></td>
+<td align="left">解密Zelix KlassMaster加密的堆栈跟踪。</td>
 <td align="left"></td>
 </tr>
 </tbody></table>
