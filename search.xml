@@ -355,61 +355,6 @@ git remote add origin git@user1.github.com:xxx/xxxxx.git<span aria-hidden="true"
       </tags>
   </entry>
   <entry>
-    <title>ecs设置</title>
-    <url>/2021/02/10/ecs/</url>
-    <content><![CDATA[<p>启用swap</p>
-<a id="more"></a>
-
-<hr>
-<h2 id="〇、配置"><a href="#〇、配置" class="headerlink" title="〇、配置"></a>〇、配置</h2><p>阿里云ECS</p>
-<table>
-
-<tbody><tr><td>CPU</td><td>2v</td></tr>
-
-<tr><td>内存</td><td>8G</td></tr>
-
-<tr><td>网络类型</td><td>vpc</td></tr>
-
-<tr><td>带宽</td><td>1M</td></tr>
-
-<tr><td>实例规格</td><td>ecs.t6-c1m2.large</td></tr>
-
-<tr><td>实例规格族</td><td>ecs.t6</td></tr>
-
-<tr><td>镜像ID</td><td>centos_8_2_x64_20G_alibase_20200914.vhd</td></tr>
-
-<tr><td>系统</td><td>centos 8.2 x64</td></tr>
-
-</tbody></table>
-
-<h2 id="启用swap"><a href="#启用swap" class="headerlink" title="启用swap"></a>启用swap</h2><p>阿里云默认没有启用swap，为了降低内存使用，开启swap交换分分区</p>
-<h3 id="查看是否启用"><a href="#查看是否启用" class="headerlink" title="查看是否启用"></a>查看是否启用</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">cat /proc/sys/vm/swappiness<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>显示为0，表示永不使用swap分区。</p>
-<ul>
-<li>swappiness=0的时候表示最大限度使用物理内存，然后才是 swap空间</li>
-<li>swappiness=60的时候表示当剩余物理内存低于40%（40=100-60）时，开始使用交换空间</li>
-<li>swappiness＝100的时候表示积极的使用swap分区，并且把内存上的数据及时的搬运到swap空间里面。</li>
-</ul>
-<h3 id="创建swap分区文件"><a href="#创建swap分区文件" class="headerlink" title="创建swap分区文件"></a>创建swap分区文件</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">dd if=/dev/zero of=/data/swap bs=512 count=8388616<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<ul>
-<li><code>/data/swap</code>为路径，可以自己指定</li>
-<li>文件的大小是<code>count</code>的大小乘以<code>bs</code>大小，上面命令的大小是<code>4294971392</code>，即<code>4GB</code></li>
-</ul>
-<h3 id="设置swap分区"><a href="#设置swap分区" class="headerlink" title="设置swap分区"></a>设置swap分区</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">mkswap /data/swap<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="启用分区交换功能"><a href="#启用分区交换功能" class="headerlink" title="启用分区交换功能"></a>启用分区交换功能</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">swapon /data/swap<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="设置开机启用"><a href="#设置开机启用" class="headerlink" title="设置开机启用"></a>设置开机启用</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">echo "/data/swap swap swap defaults    0  0" &gt;&gt; /etc/fstab<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="修改swappiness"><a href="#修改swappiness" class="headerlink" title="修改swappiness"></a>修改swappiness</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sysctl vm.swappiness=60<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>这个修改是临时修改，如果要永久修改请编辑<code>/etc/sysctl.conf</code>文件，添加如下参数</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">vm.swappiness=60<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>ops</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>linux基本命令</title>
     <url>/2021/01/31/linux/</url>
     <content><![CDATA[<p><a href="https://jaywcjlove.gitee.io/linux-command/">命令搜索网站</a></p>
@@ -461,6 +406,61 @@ Linux version 4.18.0-193.14.2.el8_2.x86_64 (mockbuild@kbuilder.bsys.centos.org) 
 rpm -qa|grep redis 
 # 查找安装包
 rpm -ql [安装包名字]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>ops</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ecs设置</title>
+    <url>/2021/02/10/ecs/</url>
+    <content><![CDATA[<p>启用swap</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="〇、配置"><a href="#〇、配置" class="headerlink" title="〇、配置"></a>〇、配置</h2><p>阿里云ECS</p>
+<table>
+
+<tbody><tr><td>CPU</td><td>2v</td></tr>
+
+<tr><td>内存</td><td>8G</td></tr>
+
+<tr><td>网络类型</td><td>vpc</td></tr>
+
+<tr><td>带宽</td><td>1M</td></tr>
+
+<tr><td>实例规格</td><td>ecs.t6-c1m2.large</td></tr>
+
+<tr><td>实例规格族</td><td>ecs.t6</td></tr>
+
+<tr><td>镜像ID</td><td>centos_8_2_x64_20G_alibase_20200914.vhd</td></tr>
+
+<tr><td>系统</td><td>centos 8.2 x64</td></tr>
+
+</tbody></table>
+
+<h2 id="启用swap"><a href="#启用swap" class="headerlink" title="启用swap"></a>启用swap</h2><p>阿里云默认没有启用swap，为了降低内存使用，开启swap交换分分区</p>
+<h3 id="查看是否启用"><a href="#查看是否启用" class="headerlink" title="查看是否启用"></a>查看是否启用</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">cat /proc/sys/vm/swappiness<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>显示为0，表示永不使用swap分区。</p>
+<ul>
+<li>swappiness=0的时候表示最大限度使用物理内存，然后才是 swap空间</li>
+<li>swappiness=60的时候表示当剩余物理内存低于40%（40=100-60）时，开始使用交换空间</li>
+<li>swappiness＝100的时候表示积极的使用swap分区，并且把内存上的数据及时的搬运到swap空间里面。</li>
+</ul>
+<h3 id="创建swap分区文件"><a href="#创建swap分区文件" class="headerlink" title="创建swap分区文件"></a>创建swap分区文件</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">dd if=/dev/zero of=/data/swap bs=512 count=8388616<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li><code>/data/swap</code>为路径，可以自己指定</li>
+<li>文件的大小是<code>count</code>的大小乘以<code>bs</code>大小，上面命令的大小是<code>4294971392</code>，即<code>4GB</code></li>
+</ul>
+<h3 id="设置swap分区"><a href="#设置swap分区" class="headerlink" title="设置swap分区"></a>设置swap分区</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">mkswap /data/swap<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="启用分区交换功能"><a href="#启用分区交换功能" class="headerlink" title="启用分区交换功能"></a>启用分区交换功能</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">swapon /data/swap<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="设置开机启用"><a href="#设置开机启用" class="headerlink" title="设置开机启用"></a>设置开机启用</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">echo "/data/swap swap swap defaults    0  0" &gt;&gt; /etc/fstab<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="修改swappiness"><a href="#修改swappiness" class="headerlink" title="修改swappiness"></a>修改swappiness</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sysctl vm.swappiness=60<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这个修改是临时修改，如果要永久修改请编辑<code>/etc/sysctl.conf</code>文件，添加如下参数</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">vm.swappiness=60<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 ]]></content>
       <categories>
         <category>ops</category>
@@ -625,6 +625,98 @@ chmod 700 /var/opt/gitlab/backups<span aria-hidden="true" class="line-numbers-ro
       </categories>
       <tags>
         <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>安装MySQL数据库</title>
+    <url>/2021/02/09/mysql/</url>
+    <content><![CDATA[<p>MySQL</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h2><ol>
+<li>添加MySQL yum源</li>
+</ol>
+<p>CentOS 7开始默认是安装的是MariaDB，如需安装MySQL需要手动添加yum源</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 下载yum源，地址从官网(https://dev.mysql.com/downloads/repo/yum/)找
+wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+# 安装yum源
+rpm -ivh mysql80-community-release-el7-3.noarch.rpm
+# 查看是否安装成功，会添加俩个仓库
+ll /etc/yum.repos.d/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="2">
+<li>运行以下命令安装MySQL</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">yum search mysql-community
+yum install mysql-community-server.x86_64<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<ol start="2">
+<li>安装完成后，运行以下命令查看MySQL版本信息</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">mysql -V
+# 输出
+mysql  Ver 8.0.24 for Linux on x86_64 (MySQL Community Server - GPL)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="配置MySQL"><a href="#配置MySQL" class="headerlink" title="配置MySQL"></a>配置MySQL</h2><ol>
+<li>运行以下命令启动MySQL，并设置为开机自启动。</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">systemctl enable --now mysqld
+# 输出(centos 8有输出，7没有）
+# Created symlink /etc/systemd/system/multi-user.target.wants/mysqld.service → /usr/lib/systemd/system/mysqld.service.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ol start="2">
+<li>运行以下命令查看MySQL是否已启动。</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">systemctl status mysqld<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>查看返回结果中Active: active (running) 表示已启动（绿色高亮）。</p>
+<ol start="3">
+<li>运行以下命令执行MySQL安全性操作并设置密码。</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 查看初始root密码
+sudo grep 'temporary password' /var/log/mysqld.log
+
+mysql_secure_installation<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>命令运行后，根据命令行提示执行如下操作。</p>
+<ul>
+<li>是否改变<code>root</code>的密码</li>
+<li>是否是否移除匿名用户</li>
+<li>是否禁止root用户远程连接MySQL</li>
+<li>是否删除test库以及对test库的访问权限。</li>
+<li>是否重新加载授权表。</li>
+</ul>
+<h2 id="远程访问MySQL"><a href="#远程访问MySQL" class="headerlink" title="远程访问MySQL"></a>远程访问MySQL</h2><ol>
+<li>运行以下命令后，输入root用户的密码登录MySQL。</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">mysql -uroot -p<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ol start="2">
+<li>在MySQL客户端中，依次运行以下命令，创建用于远程访问MySQL的账号，并允许远程主机使用该账号访问MySQL。</li>
+</ol>
+<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">create user '用户名'@'%' identified by '密码';
+grant all privileges on *.* to '用户名'@'%' with grant option;
+flush privileges;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>说明 实际创建账号时，密码需符合要求。长度为8至30个字符，必须同时包含大小写英文字母、数字和特殊符号。可以使用以下特殊符号：<br>()` ~!@#$%^&amp;*-+=|{}[]:;‘&lt;&gt;,.?/</p>
+</blockquote>
+<ol start="3">
+<li>使用账号远程登录MySQL。</li>
+</ol>
+<blockquote>
+<p>通过本地主机的远程连接工具进行测试<br>注意查看<code>mysql.user</code>中<code>host</code>字段</p>
+</blockquote>
+<ol start="4">
+<li>卸载MySQL。</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">dnf list installed | grep 'mysql'
+dnf remove mysql mysql-common mysql-errmsg mysql-server #一共7个包
+find / -name mysql 
+rm -rf 找到的相关东西<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="基本命令。"><a href="#基本命令。" class="headerlink" title="基本命令。"></a>基本命令。</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">service mysqld start #启动
+service mysqld stop  #关闭
+service mysqld restart  #重启
+killall mysqld  #结束进程(重复使用这条命令，知道没有MySQL进程可关闭)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>ops</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
@@ -801,98 +893,6 @@ psql -U postgres<span aria-hidden="true" class="line-numbers-rows"><span></span>
       </categories>
       <tags>
         <tag>postgreSQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>安装MySQL数据库</title>
-    <url>/2021/02/09/mysql/</url>
-    <content><![CDATA[<p>MySQL</p>
-<a id="more"></a>
-
-<hr>
-<h2 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h2><ol>
-<li>添加MySQL yum源</li>
-</ol>
-<p>CentOS 7开始默认是安装的是MariaDB，如需安装MySQL需要手动添加yum源</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 下载yum源，地址从官网(https://dev.mysql.com/downloads/repo/yum/)找
-wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
-# 安装yum源
-rpm -ivh mysql80-community-release-el7-3.noarch.rpm
-# 查看是否安装成功，会添加俩个仓库
-ll /etc/yum.repos.d/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ol start="2">
-<li>运行以下命令安装MySQL</li>
-</ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">yum search mysql-community
-yum install mysql-community-server.x86_64<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<ol start="2">
-<li>安装完成后，运行以下命令查看MySQL版本信息</li>
-</ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">mysql -V
-# 输出
-mysql  Ver 8.0.24 for Linux on x86_64 (MySQL Community Server - GPL)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h2 id="配置MySQL"><a href="#配置MySQL" class="headerlink" title="配置MySQL"></a>配置MySQL</h2><ol>
-<li>运行以下命令启动MySQL，并设置为开机自启动。</li>
-</ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">systemctl enable --now mysqld
-# 输出(centos 8有输出，7没有）
-# Created symlink /etc/systemd/system/multi-user.target.wants/mysqld.service → /usr/lib/systemd/system/mysqld.service.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<ol start="2">
-<li>运行以下命令查看MySQL是否已启动。</li>
-</ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">systemctl status mysqld<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>查看返回结果中Active: active (running) 表示已启动（绿色高亮）。</p>
-<ol start="3">
-<li>运行以下命令执行MySQL安全性操作并设置密码。</li>
-</ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 查看初始root密码
-sudo grep 'temporary password' /var/log/mysqld.log
-
-mysql_secure_installation<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>命令运行后，根据命令行提示执行如下操作。</p>
-<ul>
-<li>是否改变<code>root</code>的密码</li>
-<li>是否是否移除匿名用户</li>
-<li>是否禁止root用户远程连接MySQL</li>
-<li>是否删除test库以及对test库的访问权限。</li>
-<li>是否重新加载授权表。</li>
-</ul>
-<h2 id="远程访问MySQL"><a href="#远程访问MySQL" class="headerlink" title="远程访问MySQL"></a>远程访问MySQL</h2><ol>
-<li>运行以下命令后，输入root用户的密码登录MySQL。</li>
-</ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">mysql -uroot -p<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<ol start="2">
-<li>在MySQL客户端中，依次运行以下命令，创建用于远程访问MySQL的账号，并允许远程主机使用该账号访问MySQL。</li>
-</ol>
-<pre class="line-numbers language-mysql" data-language="mysql"><code class="language-mysql">create user '用户名'@'%' identified by '密码';
-grant all privileges on *.* to '用户名'@'%' with grant option;
-flush privileges;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<blockquote>
-<p>说明 实际创建账号时，密码需符合要求。长度为8至30个字符，必须同时包含大小写英文字母、数字和特殊符号。可以使用以下特殊符号：<br>()` ~!@#$%^&amp;*-+=|{}[]:;‘&lt;&gt;,.?/</p>
-</blockquote>
-<ol start="3">
-<li>使用账号远程登录MySQL。</li>
-</ol>
-<blockquote>
-<p>通过本地主机的远程连接工具进行测试<br>注意查看<code>mysql.user</code>中<code>host</code>字段</p>
-</blockquote>
-<ol start="4">
-<li>卸载MySQL。</li>
-</ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">dnf list installed | grep 'mysql'
-dnf remove mysql mysql-common mysql-errmsg mysql-server #一共7个包
-find / -name mysql 
-rm -rf 找到的相关东西<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="基本命令。"><a href="#基本命令。" class="headerlink" title="基本命令。"></a>基本命令。</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">service mysqld start #启动
-service mysqld stop  #关闭
-service mysqld restart  #重启
-killall mysqld  #结束进程(重复使用这条命令，知道没有MySQL进程可关闭)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>ops</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
       </tags>
   </entry>
   <entry>
@@ -1618,6 +1618,519 @@ Uninstalled node v14.15.5<span aria-hidden="true" class="line-numbers-rows"><spa
       </tags>
   </entry>
   <entry>
+    <title>Mac装机指南</title>
+    <url>/2021/02/26/mac-init/</url>
+    <content><![CDATA[<p>Mac装机指南</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="一、登陆、激活"><a href="#一、登陆、激活" class="headerlink" title="一、登陆、激活"></a>一、登陆、激活</h2><ul>
+<li>是否需要登陆Apple ID</li>
+<li>用户名：fc</li>
+</ul>
+<h2 id="二、基础设置"><a href="#二、基础设置" class="headerlink" title="二、基础设置"></a>二、基础设置</h2><ul>
+<li><p>系统设置</p>
+<ul>
+<li>Apple ID<ul>
+<li>如果需要iCloud空间，则转回国区</li>
+</ul>
+</li>
+<li>主要设置<ul>
+<li>程序坞<ul>
+<li>自动隐藏、右置、大小、指示灯</li>
+</ul>
+</li>
+<li>调度中心<ul>
+<li>窗口分组、显示桌面、触发角（触发屏保不要带快捷键）</li>
+</ul>
+</li>
+<li>网络<ul>
+<li>DNS</li>
+</ul>
+</li>
+<li>键盘<ul>
+<li>清空快捷键、大小写切换输入法</li>
+</ul>
+</li>
+<li>共享<ul>
+<li>修改电脑名字</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>命令设置</p>
+<ul>
+<li><p>启动trim</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">sudo nvram boot-args=rootless=0 #（作用：关闭苹果最新引入的Rootless安全机制）
+sudo trimforce enable
+#忽视警告 `Y`，重新启动 `Y`
+sudo nvram -d boot-args #（作用：重新打开苹果的Rootless安全机制）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/images/mac_init_1.png"></p>
+</li>
+<li><p>长按连续输入</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">defaults write NSGlobalDomain ApplePressAndHoldEnabled -boolean false<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>finder显示完整路径</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">defaults write com.apple.finder _FXShowPosixPathInTitle -bool true;killall finder #显示
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool false ;killall finder #隐藏<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p>finder始终显示用户资料库</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">chflags nohidden /Library/ #显示
+chflags hidden /Library/ #隐藏<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p>取消chrome 左右滑 前进后退</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>使用全部来源软件</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">sudo spctl --master-disable<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>终端隐藏命令：</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 显示
+defaults write com.apple.Dock showhidden -bool TRUE;
+killall Dock
+# 隐藏
+defaults write com.apple.Dock showhidden -bool FALSE;
+killall Dock<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>开启一位数密码终端代码</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">pwpolicy -clearaccountpolicies<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>App Store去除小红点（未成功）<br>进入<code>~/Library/Preferences/</code><br>用Xcode（或者其他任何Plist编辑器）打开 <strong>com.apple.appstored.plist</strong>，修改其中<code>appStoreBadgeCount的</code>值为0。<br>注销或者重启即可。</p>
+</li>
+<li><p>系统偏好 去除小红点（重启会重新显示）</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">defaults write com.apple.systempreferences AttentionPrefBundleIDs 0
+killall Dock<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p>设置语言为英文</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">locale #查看当前使用语言
+sudo languagesetup #回车输入密码后显示语言列表，输入对应序号后回车即可设置<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>（ps：mac分为本地域语言（主语言）和用户域语言（次语言），一般情况下你登录了账户，在偏好设置里面改的语言是“次语言”，不包括登录界面等系统级的显示语言，而使用以上终端修改的是整个系统的所有语言显示，最后，记得要重启。）</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="三、软件安装"><a href="#三、软件安装" class="headerlink" title="三、软件安装"></a>三、软件安装</h2><ul>
+<li><p><code>App Store</code>（按住⌥会显示删除按钮）</p>
+<ul>
+<li>美区<ul>
+<li>Baacloud</li>
+<li>Go2Shell、 EverNode、Manico（程序坞居中）、Dropover（跨文件夹移动文件）</li>
+</ul>
+</li>
+<li>国区<ul>
+<li>微信、企业微信、FoxMail、QQ</li>
+<li>幕布</li>
+<li>网易云音乐</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="https://brew.sh/">homebrew</a></p>
+<ul>
+<li><p>cask</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">brew install cask
+brew cask<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p>command</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">Example usage:
+brew search [TEXT|/REGEX/]
+brew info [FORMULA...]
+brew install FORMULA...
+brew update
+brew upgrade [FORMULA...]
+brew uninstall FORMULA...
+brew list [FORMULA...]
+
+Troubleshooting:
+brew config
+brew doctor
+brew install --verbose --debug FORMULA
+
+Contributing:
+brew create [URL [--no-fetch]]
+brew edit [FORMULA...]
+
+Further help:
+brew commands
+brew help [COMMAND]
+man brew
+https://docs.brew.sh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+</li>
+<li><p><a href="https://setapp.com/">Setapp</a></p>
+<table>
+<thead>
+<tr>
+<th align="left">软件名称</th>
+<th align="left">用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">2Do</td>
+<td align="left">GTD软件</td>
+</tr>
+<tr>
+<td align="left">Bartender</td>
+<td align="left">菜单栏图标折叠软件</td>
+</tr>
+<tr>
+<td align="left">Be Focused</td>
+<td align="left">番茄钟</td>
+</tr>
+<tr>
+<td align="left">cleanMyMac X</td>
+<td align="left">清理软件</td>
+</tr>
+<tr>
+<td align="left">core Shell</td>
+<td align="left">shell管理</td>
+</tr>
+<tr>
+<td align="left">Downie</td>
+<td align="left">下载软件</td>
+</tr>
+<tr>
+<td align="left">Permute</td>
+<td align="left">视频格式转换工具</td>
+</tr>
+<tr>
+<td align="left">HazeOver</td>
+<td align="left">非活动窗口置灰</td>
+</tr>
+<tr>
+<td align="left">iBoysoft NTFS for Mac</td>
+<td align="left">支持NTFS</td>
+</tr>
+<tr>
+<td align="left">MarginNode</td>
+<td align="left">读书笔记</td>
+</tr>
+<tr>
+<td align="left">Merlin Project Express</td>
+<td align="left">项目排期</td>
+</tr>
+<tr>
+<td align="left">MindNode</td>
+<td align="left">思维导图</td>
+</tr>
+<tr>
+<td align="left">MoneyWiz</td>
+<td align="left">记账软件</td>
+</tr>
+<tr>
+<td align="left">Paste</td>
+<td align="left">剪贴板记录</td>
+</tr>
+<tr>
+<td align="left">PDFpen</td>
+<td align="left">PDF软件，没用过</td>
+</tr>
+<tr>
+<td align="left">PliimPRO</td>
+<td align="left">一键隐藏桌面文件和切换壁纸</td>
+</tr>
+<tr>
+<td align="left">SideNodes</td>
+<td align="left">变栏Todo</td>
+</tr>
+<tr>
+<td align="left">TripMode</td>
+<td align="left">热点流量监控</td>
+</tr>
+<tr>
+<td align="left">Ulysses</td>
+<td align="left">写作软件</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>网上下载安装</p>
+<ul>
+<li>破解软件<ul>
+<li><a href="https://xclient.info/">UltraEdit</a></li>
+</ul>
+</li>
+<li>官方软件<ul>
+<li><a href="https://www.jetbrains.com/idea/download/">IDEA</a></li>
+<li><a href="https://www.jetbrains.com/datagrip/download/">DataGrip</a></li>
+<li><a href="https://www.mediaatelier.com/CheatSheet/">CheatSheet</a></li>
+<li><a href="https://www.alfredapp.com/">Alfred</a></li>
+<li><a href="https://www.keka.io/zh-cn/">Keka</a></li>
+<li><a href="https://rectangleapp.com/">Rectangle</a></li>
+<li><a href="https://www.parallels.cn/products/desktop/trial/">Parallels</a></li>
+<li><a href="https://www.neatdownloadmanager.com/index.php/en/">NeatDownloadManager</a></li>
+<li><a href="https://dl.snipaste.com/mac-beta-cn">Snipaste</a></li>
+<li><a href="https://telegram.org/apps">Telegram</a></li>
+<li><a href="https://paper.meiyuan.in/">pap.er</a></li>
+<li><a href="https://www.wps.com/mac/">wps国际版</a></li>
+<li><a href="http://download.huzheng.org/zh_CN/index.html">中文词典</a></li>
+<li><a href="https://www.iterm2.com/">iTerm 2</a><ul>
+<li>on-my-zsh</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="四、快捷键收集"><a href="#四、快捷键收集" class="headerlink" title="四、快捷键收集"></a>四、快捷键收集</h2><ul>
+<li>常用快捷键<ul>
+<li>Command-V：将剪贴板的内容粘贴到当前文稿或应用中。这同样适用于“访达”中的文件。</li>
+<li>Option-Command-V：将剪贴板中的文件从原始位置移动到当前位置。</li>
+<li>Control-Command-Q：立即锁定屏幕。</li>
+<li>Shift–Command–Q：退出登录您的 macOS 用户帐户。系统将提示您确认。</li>
+<li>Option-Shift-Command-Q：退出登录您的 macOS 用户帐户且不需要确认。</li>
+</ul>
+</li>
+<li>系统快捷键<ul>
+<li>Fn-上箭头：Page Up：向上滚动一页。</li>
+<li>Fn–下箭头：Page Down：向下滚动一页。</li>
+<li>Fn–左箭头：Home：滚动到文稿开头。</li>
+<li>Fn–右箭头：End：滚动到文稿末尾。</li>
+<li>Shift–Command–句号：finder显示隐藏文件夹</li>
+<li>Option-Command-C：finder复制路径</li>
+<li>Option-Command-Esc：强制退出应用。</li>
+<li>Control-Command–空格键：显示字符检视器，您可以从中选择表情符号和其他符号。</li>
+<li>空格键：使用“快速查看”来预览所选项。</li>
+<li>Option-空格键：显示所选文件的快速查看幻灯片显示。</li>
+</ul>
+</li>
+<li>文稿快捷键<ul>
+<li>Control–A：移至行或段落的开头。</li>
+<li>Control–E：移至行或段落的末尾。</li>
+<li>Control–F：向后移动一个字符。</li>
+<li>Control–B：向前移动一个字符。</li>
+<li>Control–P：上移一行。</li>
+<li>Control–N：下移一行。</li>
+<li>Control–L：将光标或所选内容置于可见区域中央。</li>
+<li>Control-K：删除插入点与行或段落末尾处之间的文本。</li>
+<li>Control-H：删除插入点左边的字符。也可以使用 Delete 键。</li>
+<li>Control-D：删除插入点右边的字符。也可以使用 Fn-Delete。</li>
+</ul>
+</li>
+</ul>
+<h2 id="五、命令别名添加"><a href="#五、命令别名添加" class="headerlink" title="五、命令别名添加"></a>五、命令别名添加</h2><p>在配置文件中添加别名。<br>zsh配置文件地址</p>
+<ul>
+<li>系统级<code>/etc/zshrc </code></li>
+<li>用户级的<code>~/.zshrc</code></li>
+</ul>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 编辑配置文件
+vim ~/.zshrc
+# 添加下面内容
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+# 刷新配置
+source ~/.zshrc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="六、特殊符号"><a href="#六、特殊符号" class="headerlink" title="六、特殊符号"></a>六、特殊符号</h2><table>
+<thead>
+<tr>
+<th align="center">原始按键</th>
+<th align="center">`</th>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">6</th>
+<th align="center">7</th>
+<th align="center">8</th>
+<th align="center">9</th>
+<th align="center">0</th>
+<th align="center">-</th>
+<th align="center">=</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Option +</td>
+<td align="center">`</td>
+<td align="center">¡</td>
+<td align="center">™</td>
+<td align="center">£</td>
+<td align="center">¢</td>
+<td align="center">∞</td>
+<td align="center">§</td>
+<td align="center">¶</td>
+<td align="center">•</td>
+<td align="center">ª</td>
+<td align="center">º</td>
+<td align="center">–</td>
+<td align="center">≠</td>
+</tr>
+<tr>
+<td align="center">Shift + Option +</td>
+<td align="center">`</td>
+<td align="center">⁄</td>
+<td align="center">€</td>
+<td align="center">‹</td>
+<td align="center">›</td>
+<td align="center">ﬁ</td>
+<td align="center">ﬂ</td>
+<td align="center">‡</td>
+<td align="center">°</td>
+<td align="center">·</td>
+<td align="center">‚</td>
+<td align="center">—</td>
+<td align="center">±</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">原始按键</th>
+<th align="center">q</th>
+<th align="center">w</th>
+<th align="center">e</th>
+<th align="center">r</th>
+<th align="center">t</th>
+<th align="center">y</th>
+<th align="center">u</th>
+<th align="center">i</th>
+<th align="center">o</th>
+<th align="center">p</th>
+<th align="center">[</th>
+<th align="center">]</th>
+<th align="center">\</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Option +</td>
+<td align="center">œ</td>
+<td align="center">∑</td>
+<td align="center">´</td>
+<td align="center">®</td>
+<td align="center">†</td>
+<td align="center">¥</td>
+<td align="center">¨</td>
+<td align="center">ˆ</td>
+<td align="center">ø</td>
+<td align="center">π</td>
+<td align="center">“</td>
+<td align="center">‘</td>
+<td align="center">&lt;&lt;</td>
+</tr>
+<tr>
+<td align="center">Shift + Option +</td>
+<td align="center">Œ</td>
+<td align="center">„</td>
+<td align="center">´</td>
+<td align="center">‰</td>
+<td align="center">ˇ</td>
+<td align="center">Á</td>
+<td align="center">¨</td>
+<td align="center">ˆ</td>
+<td align="center">Ø</td>
+<td align="center">∏</td>
+<td align="center">“</td>
+<td align="center">‘</td>
+<td align="center">&gt;&gt;</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">原始按键</th>
+<th align="center">a</th>
+<th align="center">s</th>
+<th align="center">d</th>
+<th align="center">f</th>
+<th align="center">g</th>
+<th align="center">h</th>
+<th align="center">j</th>
+<th align="center">k</th>
+<th align="center">l</th>
+<th align="center">;</th>
+<th align="center">‘</th>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Option +</td>
+<td align="center">å</td>
+<td align="center">ß</td>
+<td align="center">∂</td>
+<td align="center">ƒ</td>
+<td align="center">©</td>
+<td align="center">˙</td>
+<td align="center">∆</td>
+<td align="center">˚</td>
+<td align="center">¬</td>
+<td align="center">…</td>
+<td align="center">æ</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Shift + Option +</td>
+<td align="center">Å</td>
+<td align="center">Í</td>
+<td align="center">Î</td>
+<td align="center">Ï</td>
+<td align="center">˝</td>
+<td align="center">Ó</td>
+<td align="center">Ô</td>
+<td align="center"></td>
+<td align="center">Ò</td>
+<td align="center">Ú</td>
+<td align="center">Æ</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">原始按键</th>
+<th align="center">z</th>
+<th align="center">x</th>
+<th align="center">c</th>
+<th align="center">v</th>
+<th align="center">b</th>
+<th align="center">n</th>
+<th align="center">m</th>
+<th align="center">,</th>
+<th align="center">.</th>
+<th align="center">/</th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Option +</td>
+<td align="center">Ω</td>
+<td align="center">≈</td>
+<td align="center">ç</td>
+<td align="center">√</td>
+<td align="center">∫</td>
+<td align="center">˜</td>
+<td align="center">µ</td>
+<td align="center">≤</td>
+<td align="center">≥</td>
+<td align="center">÷</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Shift + Option +</td>
+<td align="center">¸</td>
+<td align="center">˛</td>
+<td align="center">Ç</td>
+<td align="center">◊</td>
+<td align="center">ı</td>
+<td align="center">˜</td>
+<td align="center">Â</td>
+<td align="center">¯</td>
+<td align="center">˘</td>
+<td align="center">¿</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>tool</category>
+      </categories>
+      <tags>
+        <tag>Apple</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>redis笔记</title>
     <url>/2021/03/11/reids/</url>
     <content><![CDATA[<p>Redis笔记</p>
@@ -2313,519 +2826,6 @@ select 1 #选择第一个数据库，Redis默认有16个，集群默认使用第
       </tags>
   </entry>
   <entry>
-    <title>Mac装机指南</title>
-    <url>/2021/02/26/mac-init/</url>
-    <content><![CDATA[<p>Mac装机指南</p>
-<a id="more"></a>
-
-<hr>
-<h2 id="一、登陆、激活"><a href="#一、登陆、激活" class="headerlink" title="一、登陆、激活"></a>一、登陆、激活</h2><ul>
-<li>是否需要登陆Apple ID</li>
-<li>用户名：fc</li>
-</ul>
-<h2 id="二、基础设置"><a href="#二、基础设置" class="headerlink" title="二、基础设置"></a>二、基础设置</h2><ul>
-<li><p>系统设置</p>
-<ul>
-<li>Apple ID<ul>
-<li>如果需要iCloud空间，则转回国区</li>
-</ul>
-</li>
-<li>主要设置<ul>
-<li>程序坞<ul>
-<li>自动隐藏、右置、大小、指示灯</li>
-</ul>
-</li>
-<li>调度中心<ul>
-<li>窗口分组、显示桌面、触发角（触发屏保不要带快捷键）</li>
-</ul>
-</li>
-<li>网络<ul>
-<li>DNS</li>
-</ul>
-</li>
-<li>键盘<ul>
-<li>清空快捷键、大小写切换输入法</li>
-</ul>
-</li>
-<li>共享<ul>
-<li>修改电脑名字</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>命令设置</p>
-<ul>
-<li><p>启动trim</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">sudo nvram boot-args=rootless=0 #（作用：关闭苹果最新引入的Rootless安全机制）
-sudo trimforce enable
-#忽视警告 `Y`，重新启动 `Y`
-sudo nvram -d boot-args #（作用：重新打开苹果的Rootless安全机制）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/images/mac_init_1.png"></p>
-</li>
-<li><p>长按连续输入</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">defaults write NSGlobalDomain ApplePressAndHoldEnabled -boolean false<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li><p>finder显示完整路径</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">defaults write com.apple.finder _FXShowPosixPathInTitle -bool true;killall finder #显示
-defaults write com.apple.finder _FXShowPosixPathInTitle -bool false ;killall finder #隐藏<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
-<li><p>finder始终显示用户资料库</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">chflags nohidden /Library/ #显示
-chflags hidden /Library/ #隐藏<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
-<li><p>取消chrome 左右滑 前进后退</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li><p>使用全部来源软件</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">sudo spctl --master-disable<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li><p>终端隐藏命令：</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh"># 显示
-defaults write com.apple.Dock showhidden -bool TRUE;
-killall Dock
-# 隐藏
-defaults write com.apple.Dock showhidden -bool FALSE;
-killall Dock<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li><p>开启一位数密码终端代码</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">pwpolicy -clearaccountpolicies<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li><p>App Store去除小红点（未成功）<br>进入<code>~/Library/Preferences/</code><br>用Xcode（或者其他任何Plist编辑器）打开 <strong>com.apple.appstored.plist</strong>，修改其中<code>appStoreBadgeCount的</code>值为0。<br>注销或者重启即可。</p>
-</li>
-<li><p>系统偏好 去除小红点（重启会重新显示）</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">defaults write com.apple.systempreferences AttentionPrefBundleIDs 0
-killall Dock<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
-<li><p>设置语言为英文</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">locale #查看当前使用语言
-sudo languagesetup #回车输入密码后显示语言列表，输入对应序号后回车即可设置<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>（ps：mac分为本地域语言（主语言）和用户域语言（次语言），一般情况下你登录了账户，在偏好设置里面改的语言是“次语言”，不包括登录界面等系统级的显示语言，而使用以上终端修改的是整个系统的所有语言显示，最后，记得要重启。）</p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="三、软件安装"><a href="#三、软件安装" class="headerlink" title="三、软件安装"></a>三、软件安装</h2><ul>
-<li><p><code>App Store</code>（按住⌥会显示删除按钮）</p>
-<ul>
-<li>美区<ul>
-<li>Baacloud</li>
-<li>Go2Shell、 EverNode、Manico（程序坞居中）、Dropover（跨文件夹移动文件）</li>
-</ul>
-</li>
-<li>国区<ul>
-<li>微信、企业微信、FoxMail、QQ</li>
-<li>幕布</li>
-<li>网易云音乐</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><a href="https://brew.sh/">homebrew</a></p>
-<ul>
-<li><p>cask</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">brew install cask
-brew cask<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
-<li><p>command</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">Example usage:
-brew search [TEXT|/REGEX/]
-brew info [FORMULA...]
-brew install FORMULA...
-brew update
-brew upgrade [FORMULA...]
-brew uninstall FORMULA...
-brew list [FORMULA...]
-
-Troubleshooting:
-brew config
-brew doctor
-brew install --verbose --debug FORMULA
-
-Contributing:
-brew create [URL [--no-fetch]]
-brew edit [FORMULA...]
-
-Further help:
-brew commands
-brew help [COMMAND]
-man brew
-https://docs.brew.sh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-</li>
-<li><p><a href="https://setapp.com/">Setapp</a></p>
-<table>
-<thead>
-<tr>
-<th align="left">软件名称</th>
-<th align="left">用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">2Do</td>
-<td align="left">GTD软件</td>
-</tr>
-<tr>
-<td align="left">Bartender</td>
-<td align="left">菜单栏图标折叠软件</td>
-</tr>
-<tr>
-<td align="left">Be Focused</td>
-<td align="left">番茄钟</td>
-</tr>
-<tr>
-<td align="left">cleanMyMac X</td>
-<td align="left">清理软件</td>
-</tr>
-<tr>
-<td align="left">core Shell</td>
-<td align="left">shell管理</td>
-</tr>
-<tr>
-<td align="left">Downie</td>
-<td align="left">下载软件</td>
-</tr>
-<tr>
-<td align="left">Permute</td>
-<td align="left">视频格式转换工具</td>
-</tr>
-<tr>
-<td align="left">HazeOver</td>
-<td align="left">非活动窗口置灰</td>
-</tr>
-<tr>
-<td align="left">iBoysoft NTFS for Mac</td>
-<td align="left">支持NTFS</td>
-</tr>
-<tr>
-<td align="left">MarginNode</td>
-<td align="left">读书笔记</td>
-</tr>
-<tr>
-<td align="left">Merlin Project Express</td>
-<td align="left">项目排期</td>
-</tr>
-<tr>
-<td align="left">MindNode</td>
-<td align="left">思维导图</td>
-</tr>
-<tr>
-<td align="left">MoneyWiz</td>
-<td align="left">记账软件</td>
-</tr>
-<tr>
-<td align="left">Paste</td>
-<td align="left">剪贴板记录</td>
-</tr>
-<tr>
-<td align="left">PDFpen</td>
-<td align="left">PDF软件，没用过</td>
-</tr>
-<tr>
-<td align="left">PliimPRO</td>
-<td align="left">一键隐藏桌面文件和切换壁纸</td>
-</tr>
-<tr>
-<td align="left">SideNodes</td>
-<td align="left">变栏Todo</td>
-</tr>
-<tr>
-<td align="left">TripMode</td>
-<td align="left">热点流量监控</td>
-</tr>
-<tr>
-<td align="left">Ulysses</td>
-<td align="left">写作软件</td>
-</tr>
-</tbody></table>
-</li>
-<li><p>网上下载安装</p>
-<ul>
-<li>破解软件<ul>
-<li><a href="https://xclient.info/">UltraEdit</a></li>
-</ul>
-</li>
-<li>官方软件<ul>
-<li><a href="https://www.jetbrains.com/idea/download/">IDEA</a></li>
-<li><a href="https://www.jetbrains.com/datagrip/download/">DataGrip</a></li>
-<li><a href="https://www.mediaatelier.com/CheatSheet/">CheatSheet</a></li>
-<li><a href="https://www.alfredapp.com/">Alfred</a></li>
-<li><a href="https://www.keka.io/zh-cn/">Keka</a></li>
-<li><a href="https://rectangleapp.com/">Rectangle</a></li>
-<li><a href="https://www.parallels.cn/products/desktop/trial/">Parallels</a></li>
-<li><a href="https://www.neatdownloadmanager.com/index.php/en/">NeatDownloadManager</a></li>
-<li><a href="https://dl.snipaste.com/mac-beta-cn">Snipaste</a></li>
-<li><a href="https://telegram.org/apps">Telegram</a></li>
-<li><a href="https://paper.meiyuan.in/">pap.er</a></li>
-<li><a href="https://www.wps.com/mac/">wps国际版</a></li>
-<li><a href="http://download.huzheng.org/zh_CN/index.html">中文词典</a></li>
-<li><a href="https://www.iterm2.com/">iTerm 2</a><ul>
-<li>on-my-zsh</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="四、快捷键收集"><a href="#四、快捷键收集" class="headerlink" title="四、快捷键收集"></a>四、快捷键收集</h2><ul>
-<li>常用快捷键<ul>
-<li>Command-V：将剪贴板的内容粘贴到当前文稿或应用中。这同样适用于“访达”中的文件。</li>
-<li>Option-Command-V：将剪贴板中的文件从原始位置移动到当前位置。</li>
-<li>Control-Command-Q：立即锁定屏幕。</li>
-<li>Shift–Command–Q：退出登录您的 macOS 用户帐户。系统将提示您确认。</li>
-<li>Option-Shift-Command-Q：退出登录您的 macOS 用户帐户且不需要确认。</li>
-</ul>
-</li>
-<li>系统快捷键<ul>
-<li>Fn-上箭头：Page Up：向上滚动一页。</li>
-<li>Fn–下箭头：Page Down：向下滚动一页。</li>
-<li>Fn–左箭头：Home：滚动到文稿开头。</li>
-<li>Fn–右箭头：End：滚动到文稿末尾。</li>
-<li>Shift–Command–句号：finder显示隐藏文件夹</li>
-<li>Option-Command-C：finder复制路径</li>
-<li>Option-Command-Esc：强制退出应用。</li>
-<li>Control-Command–空格键：显示字符检视器，您可以从中选择表情符号和其他符号。</li>
-<li>空格键：使用“快速查看”来预览所选项。</li>
-<li>Option-空格键：显示所选文件的快速查看幻灯片显示。</li>
-</ul>
-</li>
-<li>文稿快捷键<ul>
-<li>Control–A：移至行或段落的开头。</li>
-<li>Control–E：移至行或段落的末尾。</li>
-<li>Control–F：向后移动一个字符。</li>
-<li>Control–B：向前移动一个字符。</li>
-<li>Control–P：上移一行。</li>
-<li>Control–N：下移一行。</li>
-<li>Control–L：将光标或所选内容置于可见区域中央。</li>
-<li>Control-K：删除插入点与行或段落末尾处之间的文本。</li>
-<li>Control-H：删除插入点左边的字符。也可以使用 Delete 键。</li>
-<li>Control-D：删除插入点右边的字符。也可以使用 Fn-Delete。</li>
-</ul>
-</li>
-</ul>
-<h2 id="五、命令别名添加"><a href="#五、命令别名添加" class="headerlink" title="五、命令别名添加"></a>五、命令别名添加</h2><p>在配置文件中添加别名。<br>zsh配置文件地址</p>
-<ul>
-<li>系统级<code>/etc/zshrc </code></li>
-<li>用户级的<code>~/.zshrc</code></li>
-</ul>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 编辑配置文件
-vim ~/.zshrc
-# 添加下面内容
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-# 刷新配置
-source ~/.zshrc<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="六、特殊符号"><a href="#六、特殊符号" class="headerlink" title="六、特殊符号"></a>六、特殊符号</h2><table>
-<thead>
-<tr>
-<th align="center">原始按键</th>
-<th align="center">`</th>
-<th align="center">1</th>
-<th align="center">2</th>
-<th align="center">3</th>
-<th align="center">4</th>
-<th align="center">5</th>
-<th align="center">6</th>
-<th align="center">7</th>
-<th align="center">8</th>
-<th align="center">9</th>
-<th align="center">0</th>
-<th align="center">-</th>
-<th align="center">=</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Option +</td>
-<td align="center">`</td>
-<td align="center">¡</td>
-<td align="center">™</td>
-<td align="center">£</td>
-<td align="center">¢</td>
-<td align="center">∞</td>
-<td align="center">§</td>
-<td align="center">¶</td>
-<td align="center">•</td>
-<td align="center">ª</td>
-<td align="center">º</td>
-<td align="center">–</td>
-<td align="center">≠</td>
-</tr>
-<tr>
-<td align="center">Shift + Option +</td>
-<td align="center">`</td>
-<td align="center">⁄</td>
-<td align="center">€</td>
-<td align="center">‹</td>
-<td align="center">›</td>
-<td align="center">ﬁ</td>
-<td align="center">ﬂ</td>
-<td align="center">‡</td>
-<td align="center">°</td>
-<td align="center">·</td>
-<td align="center">‚</td>
-<td align="center">—</td>
-<td align="center">±</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th align="center">原始按键</th>
-<th align="center">q</th>
-<th align="center">w</th>
-<th align="center">e</th>
-<th align="center">r</th>
-<th align="center">t</th>
-<th align="center">y</th>
-<th align="center">u</th>
-<th align="center">i</th>
-<th align="center">o</th>
-<th align="center">p</th>
-<th align="center">[</th>
-<th align="center">]</th>
-<th align="center">\</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Option +</td>
-<td align="center">œ</td>
-<td align="center">∑</td>
-<td align="center">´</td>
-<td align="center">®</td>
-<td align="center">†</td>
-<td align="center">¥</td>
-<td align="center">¨</td>
-<td align="center">ˆ</td>
-<td align="center">ø</td>
-<td align="center">π</td>
-<td align="center">“</td>
-<td align="center">‘</td>
-<td align="center">&lt;&lt;</td>
-</tr>
-<tr>
-<td align="center">Shift + Option +</td>
-<td align="center">Œ</td>
-<td align="center">„</td>
-<td align="center">´</td>
-<td align="center">‰</td>
-<td align="center">ˇ</td>
-<td align="center">Á</td>
-<td align="center">¨</td>
-<td align="center">ˆ</td>
-<td align="center">Ø</td>
-<td align="center">∏</td>
-<td align="center">“</td>
-<td align="center">‘</td>
-<td align="center">&gt;&gt;</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th align="center">原始按键</th>
-<th align="center">a</th>
-<th align="center">s</th>
-<th align="center">d</th>
-<th align="center">f</th>
-<th align="center">g</th>
-<th align="center">h</th>
-<th align="center">j</th>
-<th align="center">k</th>
-<th align="center">l</th>
-<th align="center">;</th>
-<th align="center">‘</th>
-<th align="center"></th>
-<th align="center"></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Option +</td>
-<td align="center">å</td>
-<td align="center">ß</td>
-<td align="center">∂</td>
-<td align="center">ƒ</td>
-<td align="center">©</td>
-<td align="center">˙</td>
-<td align="center">∆</td>
-<td align="center">˚</td>
-<td align="center">¬</td>
-<td align="center">…</td>
-<td align="center">æ</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">Shift + Option +</td>
-<td align="center">Å</td>
-<td align="center">Í</td>
-<td align="center">Î</td>
-<td align="center">Ï</td>
-<td align="center">˝</td>
-<td align="center">Ó</td>
-<td align="center">Ô</td>
-<td align="center"></td>
-<td align="center">Ò</td>
-<td align="center">Ú</td>
-<td align="center">Æ</td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th align="center">原始按键</th>
-<th align="center">z</th>
-<th align="center">x</th>
-<th align="center">c</th>
-<th align="center">v</th>
-<th align="center">b</th>
-<th align="center">n</th>
-<th align="center">m</th>
-<th align="center">,</th>
-<th align="center">.</th>
-<th align="center">/</th>
-<th align="center"></th>
-<th align="center"></th>
-<th align="center"></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Option +</td>
-<td align="center">Ω</td>
-<td align="center">≈</td>
-<td align="center">ç</td>
-<td align="center">√</td>
-<td align="center">∫</td>
-<td align="center">˜</td>
-<td align="center">µ</td>
-<td align="center">≤</td>
-<td align="center">≥</td>
-<td align="center">÷</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">Shift + Option +</td>
-<td align="center">¸</td>
-<td align="center">˛</td>
-<td align="center">Ç</td>
-<td align="center">◊</td>
-<td align="center">ı</td>
-<td align="center">˜</td>
-<td align="center">Â</td>
-<td align="center">¯</td>
-<td align="center">˘</td>
-<td align="center">¿</td>
-<td align="center"></td>
-<td align="center"></td>
-<td align="center"></td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>tool</category>
-      </categories>
-      <tags>
-        <tag>Apple</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>RabbitMQ笔记</title>
     <url>/2021/03/14/rabbitmq/</url>
     <content><![CDATA[<p>RabbitMQ笔记</p>
@@ -3285,6 +3285,30 @@ source ~/.zshrc<span aria-hidden="true" class="line-numbers-rows"><span></span><
       </tags>
   </entry>
   <entry>
+    <title>Alfred配置详解</title>
+    <url>/2021/01/01/alfred/</url>
+    <content><![CDATA[<p>Alfred</p>
+<a id="more"></a>
+
+<hr>
+<h3 id="自定义搜索"><a href="#自定义搜索" class="headerlink" title="自定义搜索"></a>自定义搜索</h3><ul>
+<li>微信搜索<ul>
+<li><code>https://weixin.sogou.com/weixin?type=2&amp;query={query}</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="Workflows"><a href="#Workflows" class="headerlink" title="Workflows"></a>Workflows</h3><ul>
+<li>Linux脚本<br><code>https://github.com/jaywcjlove/linux-command/releases?after=v1.2.11</code></li>
+</ul>
+]]></content>
+      <categories>
+        <category>tool</category>
+      </categories>
+      <tags>
+        <tag>Apple</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java 8特性</title>
     <url>/2021/03/30/java8/</url>
     <content><![CDATA[<p>Java 8特性</p>
@@ -3392,30 +3416,6 @@ source ~/.zshrc<span aria-hidden="true" class="line-numbers-rows"><span></span><
       </tags>
   </entry>
   <entry>
-    <title>Alfred配置详解</title>
-    <url>/2021/01/01/alfred/</url>
-    <content><![CDATA[<p>Alfred</p>
-<a id="more"></a>
-
-<hr>
-<h3 id="自定义搜索"><a href="#自定义搜索" class="headerlink" title="自定义搜索"></a>自定义搜索</h3><ul>
-<li>微信搜索<ul>
-<li><code>https://weixin.sogou.com/weixin?type=2&amp;query={query}</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="Workflows"><a href="#Workflows" class="headerlink" title="Workflows"></a>Workflows</h3><ul>
-<li>Linux脚本<br><code>https://github.com/jaywcjlove/linux-command/releases?after=v1.2.11</code></li>
-</ul>
-]]></content>
-      <categories>
-        <category>tool</category>
-      </categories>
-      <tags>
-        <tag>Apple</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>国内镜像源</title>
     <url>/2021/04/22/mirror/</url>
     <content><![CDATA[<p>国内镜像源</p>
@@ -3498,6 +3498,78 @@ ps -ef|grep weblogic|grep -v grep<span aria-hidden="true" class="line-numbers-ro
       <tags>
         <tag>Linux</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>reg</title>
+    <url>/2021/04/29/reg/</url>
+    <content><![CDATA[<p>windows注册表</p>
+<a id="more"></a>
+
+<hr>
+<pre class="line-numbers language-bat" data-language="bat"><code class="language-bat">Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\cmd]
+@="@shell32.dll,-8506"
+"Extended"=""
+"HideBasedOnVelocityId"=dword:00639bc8
+"NoWorkingDirectory"=""
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\cmd\command]
+@="cmd.exe /s /k pushd \"%V\""
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\Fliqlo]
+@="开启屏保"
+"Extended"=""
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\Fliqlo\command]
+@="Fliqlo.scr"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\git_gui]
+@="Git &amp;GUI Here"
+"Icon"="d:\\Program Files\\Git\\cmd\\git-gui.exe"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\git_gui\command]
+@="\"d:\\Program Files\\Git\\cmd\\git-gui.exe\" \"--working-dir\" \"%v.\""
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\git_shell]
+@="Git Ba&amp;sh Here"
+"Icon"="d:\\Program Files\\Git\\git-bash.exe"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\git_shell\command]
+@="\"d:\\Program Files\\Git\\git-bash.exe\" \"--cd=%v.\""
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\OpenCmdHere]
+@="在此处打开命令行窗口"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\OpenCmdHere\command]
+@="cmd.exe -noexit -command Set-Location -literalPath \"%V\""
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\OpenCmdHereAdmin]
+@="在此处打开命令行窗口(管理员)"
+"ShowBasedOnVelocityId"=dword:00639bc8
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\OpenCmdHereAdmin\command]
+@="cmd.exe /s /k pushd \"%V\""
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\Powershell]
+@="@shell32.dll,-8508"
+"Extended"=""
+"NoWorkingDirectory"=""
+"ShowBasedOnVelocityId"=dword:00639bc8
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\Powershell\command]
+@="powershell.exe -noexit -command Set-Location -literalPath '%V'"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\PowershellAdmin]
+@="在此处打开 Powershell 窗口(管理员)"
+"Extended"=""
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\PowershellAdmin\command]
+@="\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -windowstyle hidden -Command $stpath = pwd; Start-Process PowerShell -ArgumentList \\\"-NoExit\\\", \\\"-Command Set-Location -literalPath '%V'\\\" -verb RunAs"
+
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
   </entry>
   <entry>
     <title>Clash配置详解</title>
@@ -3967,78 +4039,6 @@ ps -ef|grep weblogic|grep -v grep<span aria-hidden="true" class="line-numbers-ro
       <tags>
         <tag>GFW</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>reg</title>
-    <url>/2021/04/29/reg/</url>
-    <content><![CDATA[<p>windows注册表</p>
-<a id="more"></a>
-
-<hr>
-<pre class="line-numbers language-bat" data-language="bat"><code class="language-bat">Windows Registry Editor Version 5.00
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell]
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\cmd]
-@="@shell32.dll,-8506"
-"Extended"=""
-"HideBasedOnVelocityId"=dword:00639bc8
-"NoWorkingDirectory"=""
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\cmd\command]
-@="cmd.exe /s /k pushd \"%V\""
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\Fliqlo]
-@="开启屏保"
-"Extended"=""
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\Fliqlo\command]
-@="Fliqlo.scr"
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\git_gui]
-@="Git &amp;GUI Here"
-"Icon"="d:\\Program Files\\Git\\cmd\\git-gui.exe"
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\git_gui\command]
-@="\"d:\\Program Files\\Git\\cmd\\git-gui.exe\" \"--working-dir\" \"%v.\""
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\git_shell]
-@="Git Ba&amp;sh Here"
-"Icon"="d:\\Program Files\\Git\\git-bash.exe"
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\git_shell\command]
-@="\"d:\\Program Files\\Git\\git-bash.exe\" \"--cd=%v.\""
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\OpenCmdHere]
-@="在此处打开命令行窗口"
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\OpenCmdHere\command]
-@="cmd.exe -noexit -command Set-Location -literalPath \"%V\""
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\OpenCmdHereAdmin]
-@="在此处打开命令行窗口(管理员)"
-"ShowBasedOnVelocityId"=dword:00639bc8
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\OpenCmdHereAdmin\command]
-@="cmd.exe /s /k pushd \"%V\""
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\Powershell]
-@="@shell32.dll,-8508"
-"Extended"=""
-"NoWorkingDirectory"=""
-"ShowBasedOnVelocityId"=dword:00639bc8
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\Powershell\command]
-@="powershell.exe -noexit -command Set-Location -literalPath '%V'"
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\PowershellAdmin]
-@="在此处打开 Powershell 窗口(管理员)"
-"Extended"=""
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Directory\background\shell\PowershellAdmin\command]
-@="\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -windowstyle hidden -Command $stpath = pwd; Start-Process PowerShell -ArgumentList \\\"-NoExit\\\", \\\"-Command Set-Location -literalPath '%V'\\\" -verb RunAs"
-
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
   </entry>
   <entry>
     <title>Suger配置详解</title>
