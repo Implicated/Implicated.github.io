@@ -1,6 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>hexo静态博客</title>
+    <url>/2021/01/01/hexo/</url>
+    <content><![CDATA[<p>使用hexo和github搭建个人博客</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="注册GitHub"><a href="#注册GitHub" class="headerlink" title="注册GitHub"></a>注册GitHub</h3><ul>
+<li>设置SSH</li>
+</ul>
+<h3 id="安装GIT（用于发布到github）"><a href="#安装GIT（用于发布到github）" class="headerlink" title="安装GIT（用于发布到github）"></a>安装GIT（用于发布到github）</h3><pre class="line-numbers language-none"><code class="language-none">git --version<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="安装NodeJS（用于安装hexo）"><a href="#安装NodeJS（用于安装hexo）" class="headerlink" title="安装NodeJS（用于安装hexo）"></a>安装NodeJS（用于安装hexo）</h3><pre class="line-numbers language-none"><code class="language-none">node -v
+npm -v<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="全局安装hexo"><a href="#全局安装hexo" class="headerlink" title="全局安装hexo"></a>全局安装hexo</h3><ul>
+<li>安装hexo</li>
+</ul>
+<pre class="line-numbers language-nodejs" data-language="nodejs"><code class="language-nodejs">npm install -g hexo-cli
+hexo version<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><h3 id="启动hexo"><a href="#启动hexo" class="headerlink" title="启动hexo"></a>启动hexo</h3><pre class="line-numbers language-bat" data-language="bat"><code class="language-bat">cd &lt;博客目录&gt;
+
+REM必须是空目录
+hexo init
+REM 安装package.json中全部依赖
+npm install
+REM 生成静态页面
+hexo g
+REM 启动hexo服务[localhost:4000]
+hexo s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>tips:</p>
+<p>hexo init执行了两步操作</p>
+<ul>
+<li>clone <a href="https://github.com/hexojs/hexo-starter">https://github.com/hexojs/hexo-starter</a></li>
+<li>执行 <code>npm install</code></li>
+</ul>
+<h3 id="配置Hexo到Github"><a href="#配置Hexo到Github" class="headerlink" title="配置Hexo到Github"></a>配置Hexo到Github</h3><pre class="line-numbers language-none"><code class="language-none">cd &lt;博客目录&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>修改最下面的配置，可选http和SSH，http需要每次输入密码</p>
+<blockquote>
+<p>deploy:<br>type: git repository: <a href="http://github.com/implcated/implcated.github.io.git">http://github.com/implcated/implcated.github.io.git</a><br>branch: main</p>
+</blockquote>
+<h2 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h2><p>使用不同GitHub分支会使源码仓库为<em>public</em>，本方法需要将之前的源代码建立一个远程仓库。</p>
+<p><del>### 新建hexo项目</del></p>
+<p><del>在新电脑上创建hexo项目，并执行<code>hexo init</code>、<code>npm install</code>命令</del></p>
+<p><del>### 移除安装的hexo文件</del></p>
+<p><del>将hexo项目中除<code>.git</code> <code>node_modules</code>之外的文件全部删除</del></p>
+<p><del>### 关联远程仓库</del></p>
+<p><del><a href="/2021/02/21/idea-git/" title="点击查看之前的文章">点击查看之前的文章</a></del></p>
+<ul>
+<li><p>clone仓库</p>
+</li>
+<li><p>执行<code>npm install</code></p>
+</li>
+</ul>
+<h2 id="内连标签"><a href="#内连标签" class="headerlink" title="内连标签"></a>内连标签</h2><ul>
+<li>引用图片</li>
+</ul>
+<pre class="line-numbers language-hexo" data-language="hexo"><code class="language-hexo">{% asset_img 图片名称带后缀 [替换文本（alt属性）] %}<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>引用站内文章</li>
+</ul>
+<pre class="line-numbers language-hexo" data-language="hexo"><code class="language-hexo">{% post_link 文件名(不要permalink配置的日期、不要后缀.md) 文章别名(可选) %}<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>fe</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>markdown语法</title>
     <url>/2021/01/01/md/</url>
     <content><![CDATA[<a id="more"></a>
@@ -127,74 +195,6 @@
       </categories>
       <tags>
         <tag>MD</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo静态博客</title>
-    <url>/2021/01/01/hexo/</url>
-    <content><![CDATA[<p>使用hexo和github搭建个人博客</p>
-<a id="more"></a>
-
-<hr>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="注册GitHub"><a href="#注册GitHub" class="headerlink" title="注册GitHub"></a>注册GitHub</h3><ul>
-<li>设置SSH</li>
-</ul>
-<h3 id="安装GIT（用于发布到github）"><a href="#安装GIT（用于发布到github）" class="headerlink" title="安装GIT（用于发布到github）"></a>安装GIT（用于发布到github）</h3><pre class="line-numbers language-none"><code class="language-none">git --version<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="安装NodeJS（用于安装hexo）"><a href="#安装NodeJS（用于安装hexo）" class="headerlink" title="安装NodeJS（用于安装hexo）"></a>安装NodeJS（用于安装hexo）</h3><pre class="line-numbers language-none"><code class="language-none">node -v
-npm -v<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h3 id="全局安装hexo"><a href="#全局安装hexo" class="headerlink" title="全局安装hexo"></a>全局安装hexo</h3><ul>
-<li>安装hexo</li>
-</ul>
-<pre class="line-numbers language-nodejs" data-language="nodejs"><code class="language-nodejs">npm install -g hexo-cli
-hexo version<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><h3 id="启动hexo"><a href="#启动hexo" class="headerlink" title="启动hexo"></a>启动hexo</h3><pre class="line-numbers language-bat" data-language="bat"><code class="language-bat">cd &lt;博客目录&gt;
-
-REM必须是空目录
-hexo init
-REM 安装package.json中全部依赖
-npm install
-REM 生成静态页面
-hexo g
-REM 启动hexo服务[localhost:4000]
-hexo s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>tips:</p>
-<p>hexo init执行了两步操作</p>
-<ul>
-<li>clone <a href="https://github.com/hexojs/hexo-starter">https://github.com/hexojs/hexo-starter</a></li>
-<li>执行 <code>npm install</code></li>
-</ul>
-<h3 id="配置Hexo到Github"><a href="#配置Hexo到Github" class="headerlink" title="配置Hexo到Github"></a>配置Hexo到Github</h3><pre class="line-numbers language-none"><code class="language-none">cd &lt;博客目录&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>修改最下面的配置，可选http和SSH，http需要每次输入密码</p>
-<blockquote>
-<p>deploy:<br>type: git repository: <a href="http://github.com/implcated/implcated.github.io.git">http://github.com/implcated/implcated.github.io.git</a><br>branch: main</p>
-</blockquote>
-<h2 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h2><p>使用不同GitHub分支会使源码仓库为<em>public</em>，本方法需要将之前的源代码建立一个远程仓库。</p>
-<p><del>### 新建hexo项目</del></p>
-<p><del>在新电脑上创建hexo项目，并执行<code>hexo init</code>、<code>npm install</code>命令</del></p>
-<p><del>### 移除安装的hexo文件</del></p>
-<p><del>将hexo项目中除<code>.git</code> <code>node_modules</code>之外的文件全部删除</del></p>
-<p><del>### 关联远程仓库</del></p>
-<p><del><a href="/2021/02/21/idea-git/" title="点击查看之前的文章">点击查看之前的文章</a></del></p>
-<ul>
-<li><p>clone仓库</p>
-</li>
-<li><p>执行<code>npm install</code></p>
-</li>
-</ul>
-<h2 id="内连标签"><a href="#内连标签" class="headerlink" title="内连标签"></a>内连标签</h2><ul>
-<li>引用图片</li>
-</ul>
-<pre class="line-numbers language-hexo" data-language="hexo"><code class="language-hexo">{% asset_img 图片名称带后缀 [替换文本（alt属性）] %}<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<ul>
-<li>引用站内文章</li>
-</ul>
-<pre class="line-numbers language-hexo" data-language="hexo"><code class="language-hexo">{% post_link 文件名(不要permalink配置的日期、不要后缀.md) 文章别名(可选) %}<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>fe</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -467,6 +467,21 @@ rpm -ql [安装包名字]<span aria-hidden="true" class="line-numbers-rows"><spa
       </categories>
       <tags>
         <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搭建FTP应用</title>
+    <url>/2021/02/10/ftp/</url>
+    <content><![CDATA[<p>FTP</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h2>]]></content>
+      <categories>
+        <category>ops</category>
+      </categories>
+      <tags>
+        <tag>FTP</tag>
       </tags>
   </entry>
   <entry>
@@ -881,21 +896,6 @@ psql -U postgres<span aria-hidden="true" class="line-numbers-rows"><span></span>
       </tags>
   </entry>
   <entry>
-    <title>搭建FTP应用</title>
-    <url>/2021/02/10/ftp/</url>
-    <content><![CDATA[<p>FTP</p>
-<a id="more"></a>
-
-<hr>
-<h2 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h2>]]></content>
-      <categories>
-        <category>ops</category>
-      </categories>
-      <tags>
-        <tag>FTP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>搭建redis集群</title>
     <url>/2021/02/22/redis-cluster/</url>
     <content><![CDATA[<p>Windows、MacOS下Redis集群配置</p>
@@ -1008,69 +1008,6 @@ some key in database 0.<span aria-hidden="true" class="line-numbers-rows"><span>
       </categories>
       <tags>
         <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>git一个项目设置多个远程仓库（push）</title>
-    <url>/2021/02/10/git-mult-repo/</url>
-    <content><![CDATA[<p>三个方法</p>
-<a id="more"></a>
-
-<hr>
-<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><ol>
-<li>如下命令查看远程仓库的情况，可以看到只有一个叫 origin 的远程仓库。</li>
-</ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git remote -v
-origin  https://github.com/zxbetter/test.git (fetch)
-origin  https://github.com/zxbetter/test.git (push)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<ol start="2">
-<li>使用如下命令再添加一个远程仓库（这里以码云为例）</li>
-</ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git remote add oschina https://git.oschina.net/zxbetter/test.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<ol start="3">
-<li>再次查看远程仓库的情况，可以看到已经有两个远程仓库了。然后再使用相应的命令 push 到对应的仓库就行了。这种方法的缺点是每次要 push 两次。</li>
-</ol>
-<p>git remote origin oschina</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git remote -v 
-origin  https://github.com/zxbetter/test.git (fetch)
-origin  https://github.com/zxbetter/test.git (push)
-oschina https://git.oschina.net/zxbetter/test.git (fetch)
-oschina https://git.oschina.net/zxbetter/test.git (push)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="方法二、使用git-remote-set-url命令"><a href="#方法二、使用git-remote-set-url命令" class="headerlink" title="方法二、使用git remote set-url命令"></a>方法二、使用<code>git remote set-url</code>命令</h2><ol>
-<li>删除方法一的 oschina 远程仓库。</li>
-</ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git remote rm oschina<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<ol start="2">
-<li>使用如下命令添加远程仓库。</li>
-</ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git remote set-url --add origin https://git.oschina.net/zxbetter/test.git
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<ol start="3">
-<li>查看远程仓库情况。可以看到 github 远程仓库有两个 push 地址。这种方法的好处是每次只需要 push 一次就行了。</li>
-</ol>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git remote -v 
-origin  https://github.com/zxbetter/test.git (fetch)
-origin  https://github.com/zxbetter/test.git (push)
-origin  https://git.oschina.net/zxbetter/test.git (push)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="方法三、修改配置文件"><a href="#方法三、修改配置文件" class="headerlink" title="方法三、修改配置文件"></a>方法三、修改配置文件</h2><p>打开 <strong>.git/config</strong> 找到 <code>[remote "origin"]</code>，添加对应的 url 即可，效果如下。这种方法其实和方法二是一样的。</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">[remote "origin"]
-url = https://github.com/zxbetter/test.git
-fetch = +refs/heads/*:refs/remotes/github/*
-url = https://git.oschina.net/zxbetter/test.git<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="关于-git-pull"><a href="#关于-git-pull" class="headerlink" title="关于 git pull"></a>关于 git pull</h2><p>方法二和三在 push 的时候比较方便。但是在 pull 的时候只能从方法三中的第一个 url 地址拉取代码。而方法一则不存在这种问题（可能要解决冲突）。 所以，如果只进行 push 操作，推荐方法二和三，如果也要进行 pull 操作，推荐方法一。</p>
-<hr>
-<blockquote>
-<p>参考</p>
-<blockquote>
-<p><a href="https://segmentfault.com/a/1190000011294144">一个项目push到多个远程Git仓库</a></p>
-</blockquote>
-</blockquote>
-]]></content>
-      <categories>
-        <category>be</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
@@ -1199,6 +1136,69 @@ JAVA_OPT="${JAVA_OPT} -cp ${CLASSPATH}"<span aria-hidden="true" class="line-numb
       </categories>
       <tags>
         <tag>RocketMQ</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git一个项目设置多个远程仓库（push）</title>
+    <url>/2021/02/10/git-mult-repo/</url>
+    <content><![CDATA[<p>三个方法</p>
+<a id="more"></a>
+
+<hr>
+<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><ol>
+<li>如下命令查看远程仓库的情况，可以看到只有一个叫 origin 的远程仓库。</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git remote -v
+origin  https://github.com/zxbetter/test.git (fetch)
+origin  https://github.com/zxbetter/test.git (push)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ol start="2">
+<li>使用如下命令再添加一个远程仓库（这里以码云为例）</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git remote add oschina https://git.oschina.net/zxbetter/test.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ol start="3">
+<li>再次查看远程仓库的情况，可以看到已经有两个远程仓库了。然后再使用相应的命令 push 到对应的仓库就行了。这种方法的缺点是每次要 push 两次。</li>
+</ol>
+<p>git remote origin oschina</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git remote -v 
+origin  https://github.com/zxbetter/test.git (fetch)
+origin  https://github.com/zxbetter/test.git (push)
+oschina https://git.oschina.net/zxbetter/test.git (fetch)
+oschina https://git.oschina.net/zxbetter/test.git (push)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="方法二、使用git-remote-set-url命令"><a href="#方法二、使用git-remote-set-url命令" class="headerlink" title="方法二、使用git remote set-url命令"></a>方法二、使用<code>git remote set-url</code>命令</h2><ol>
+<li>删除方法一的 oschina 远程仓库。</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git remote rm oschina<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ol start="2">
+<li>使用如下命令添加远程仓库。</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git remote set-url --add origin https://git.oschina.net/zxbetter/test.git
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ol start="3">
+<li>查看远程仓库情况。可以看到 github 远程仓库有两个 push 地址。这种方法的好处是每次只需要 push 一次就行了。</li>
+</ol>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">git remote -v 
+origin  https://github.com/zxbetter/test.git (fetch)
+origin  https://github.com/zxbetter/test.git (push)
+origin  https://git.oschina.net/zxbetter/test.git (push)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="方法三、修改配置文件"><a href="#方法三、修改配置文件" class="headerlink" title="方法三、修改配置文件"></a>方法三、修改配置文件</h2><p>打开 <strong>.git/config</strong> 找到 <code>[remote "origin"]</code>，添加对应的 url 即可，效果如下。这种方法其实和方法二是一样的。</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">[remote "origin"]
+url = https://github.com/zxbetter/test.git
+fetch = +refs/heads/*:refs/remotes/github/*
+url = https://git.oschina.net/zxbetter/test.git<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="关于-git-pull"><a href="#关于-git-pull" class="headerlink" title="关于 git pull"></a>关于 git pull</h2><p>方法二和三在 push 的时候比较方便。但是在 pull 的时候只能从方法三中的第一个 url 地址拉取代码。而方法一则不存在这种问题（可能要解决冲突）。 所以，如果只进行 push 操作，推荐方法二和三，如果也要进行 pull 操作，推荐方法一。</p>
+<hr>
+<blockquote>
+<p>参考</p>
+<blockquote>
+<p><a href="https://segmentfault.com/a/1190000011294144">一个项目push到多个远程Git仓库</a></p>
+</blockquote>
+</blockquote>
+]]></content>
+      <categories>
+        <category>be</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
       </tags>
   </entry>
   <entry>
