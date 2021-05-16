@@ -602,7 +602,467 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"前端","value":3},{"name":"笔记","value":5},{"name":"后端","value":4},{"name":"运维","value":10},{"name":"工具","value":7}],
+                data: [{"name":"笔记","value":5},{"name":"前端","value":3},{"name":"后端","value":4},{"name":"运维","value":10},{"name":"工具","value":7}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }
+        ]
+    };
+
+    
+
+    let tagsOption = {
+        title: {
+            text: 'TOP10 标签统计图',
+            top: -5,
+            x: 'center'
+        },
+        tooltip: {},
+        xAxis: [
+            {
+                type: 'category',
+                data: ["Git","Linux","MySQL","Redis","IDEA","Apple","MQ","GFW","MD","Hexo"]
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+                type: 'bar',
+                color: ['#82d3f4'],
+                barWidth : 18,
+                data: [3,3,2,2,2,2,2,2,1,1],
+                markPoint: {
+                    symbolSize: 45,
+                    data: [{
+                        type: 'max',
+                        itemStyle: {color: ['#3ecf8e']},
+                        name: '最大值'
+                    }, {
+                        type: 'min',
+                        itemStyle: {color: ['#fa755a']},
+                        name: '最小值'
+                    }],
+                },
+                markLine: {
+                    itemStyle: {color: ['#ab47bc']},
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                }
+            }
+        ]
+    };
+
+    // render the charts
+    postsChart.setOption(postsOption);
+    categoriesChart.setOption(categoriesOption);
+    tagsChart.setOption(tagsOption);
+</script>
+
+
+                
+
+                
+                
+<div class="my-skills">
+    <div class="title center-align" data-aos="zoom-in-up">
+        <i class="fas fa-wrench"></i>&nbsp;&nbsp;我的技能
+    </div>
+    <div class="row">
+        
+        
+        
+        <div class="col s12 m6 l6" data-aos="fade-up">
+            <div class="skillbar">
+                <div class="skillbar-title"
+                     style="background: linear-gradient(to right, #FF0066 0%, #FF00CC 100%); width: 55%">
+                    <span>Java</span>
+                </div>
+                <div class="skill-bar-percent">55%</div>
+            </div>
+        </div>
+        
+        
+        <div class="col s12 m6 l6" data-aos="fade-up">
+            <div class="skillbar">
+                <div class="skillbar-title"
+                     style="background: linear-gradient(to right, #9900FF 0%, #CC66FF 100%); width: 50%">
+                    <span>JavaScript</span>
+                </div>
+                <div class="skill-bar-percent">50%</div>
+            </div>
+        </div>
+        
+        
+        <div class="col s12 m6 l6" data-aos="fade-up">
+            <div class="skillbar">
+                <div class="skillbar-title"
+                     style="background: linear-gradient(to right, #2196F3 0%, #42A5F5 100%); width: 20%">
+                    <span>HTML5</span>
+                </div>
+                <div class="skill-bar-percent">20%</div>
+            </div>
+        </div>
+        
+        
+        <div class="col s12 m6 l6" data-aos="fade-up">
+            <div class="skillbar">
+                <div class="skillbar-title"
+                     style="background: linear-gradient(to right, #00BCD4 0%, #80DEEA 100%); width: 10%">
+                    <span>CSS</span>
+                </div>
+                <div class="skill-bar-percent">10%</div>
+            </div>
+        </div>
+        
+        
+        <div class="col s12 m6 l6" data-aos="fade-up">
+            <div class="skillbar">
+                <div class="skillbar-title"
+                     style="background: linear-gradient(to right, #4CAF50 0%, #81C784 100%); width: 50%">
+                    <span>SQL</span>
+                </div>
+                <div class="skill-bar-percent">50%</div>
+            </div>
+        </div>
+        
+        
+    </div>
+
+    
+
+    
+    <div class="other-skills chip-container" data-aos="zoom-in-up">
+        <div class="sub-title center-align"><i class="fa fa-book"></i>&nbsp;&nbsp;其他技能</div>
+        <div class="tag-chips center-align">
+            
+            
+            <a href="/tags/MD/">
+                <span class="chip center-align waves-effect waves-light chip-default">MD</span>
+            </a>
+            
+            
+            
+            <a href="/tags/Hexo/">
+                <span class="chip center-align waves-effect waves-light chip-default">Hexo</span>
+            </a>
+            
+            
+            
+            <a href="/tags/Git/">
+                <span class="chip center-align waves-effect waves-light chip-default">Git</span>
+            </a>
+            
+            
+            
+            <a href="/tags/Linux/">
+                <span class="chip center-align waves-effect waves-light chip-default">Linux</span>
+            </a>
+            
+            
+            
+            <a href="/tags/MySQL/">
+                <span class="chip center-align waves-effect waves-light chip-default">MySQL</span>
+            </a>
+            
+            
+            
+            <a href="/tags/postgreSQL/">
+                <span class="chip center-align waves-effect waves-light chip-default">postgreSQL</span>
+            </a>
+            
+            
+            
+            <a href="/tags/FTP/">
+                <span class="chip center-align waves-effect waves-light chip-default">FTP</span>
+            </a>
+            
+            
+            
+            <a href="/tags/Redis/">
+                <span class="chip center-align waves-effect waves-light chip-default">Redis</span>
+            </a>
+            
+            
+            
+            <a href="/tags/RocketMQ/">
+                <span class="chip center-align waves-effect waves-light chip-default">RocketMQ</span>
+            </a>
+            
+            
+            
+            
+            
+            <a href="/tags/IDEA/">
+                <span class="chip center-align waves-effect waves-light chip-default">IDEA</span>
+            </a>
+            
+            
+            
+            <a href="/tags/NodeJS/">
+                <span class="chip center-align waves-effect waves-light chip-default">NodeJS</span>
+            </a>
+            
+            
+            
+            <a href="/tags/Apple/">
+                <span class="chip center-align waves-effect waves-light chip-default">Apple</span>
+            </a>
+            
+            
+            
+            <a href="/tags/MQ/">
+                <span class="chip center-align waves-effect waves-light chip-default">MQ</span>
+            </a>
+            
+            
+            
+            <a href="/tags/Vim/">
+                <span class="chip center-align waves-effect waves-light chip-default">Vim</span>
+            </a>
+            
+            
+            
+            <a href="/tags/java/">
+                <span class="chip center-align waves-effect waves-light chip-default">java</span>
+            </a>
+            
+            
+            
+            <a href="/tags/Maven/">
+                <span class="chip center-align waves-effect waves-light chip-default">Maven</span>
+            </a>
+            
+            
+            
+            <a href="/tags/Mirror/">
+                <span class="chip center-align waves-effect waves-light chip-default">Mirror</span>
+            </a>
+            
+            
+            
+            <a href="/tags/js/">
+                <span class="chip center-align waves-effect waves-light chip-default">js</span>
+            </a>
+            
+            
+            
+            <a href="/tags/GFW/">
+                <span class="chip center-align waves-effect waves-light chip-default">GFW</span>
+            </a>
+            
+            
+        </div>
+    </div>
+    
+
+</div>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</main>
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2021</span>
+            
+            <span id="year">2021</span>
+            <a href="/about" target="_blank">Implicated</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link ">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+    
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
