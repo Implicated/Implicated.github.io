@@ -147,6 +147,17 @@
   
   <li class="hide-on-med-and-down nav-item">
     
+    <a href="/galleries" class="waves-effect waves-light">
+      
+      <i class="fas fa-photo-video" style="zoom: 0.6;"></i>
+      
+      <span>相册</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
     <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
@@ -286,6 +297,17 @@
 			    <i class="fa-fw fas fa-tags"></i>
 			
 			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/galleries" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-photo-video"></i>
+			
+			相册
 		</a>
           
         </li>
@@ -488,14 +510,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    792
+                    819
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    3 分
                 </div>
                 
 
@@ -523,7 +545,7 @@
 
 <hr>
 <h2 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h2><ul>
-<li>命令模式【一般模式】<ul>
+<li>普通模式【Normal】<ul>
 <li>用户刚刚启动 vi/vim，便进入了命令模式。此状态下敲击键盘动作会被Vim识别为命令，而非输入字符。比如我们此时按下i，并不会输入一个字符，i被当作了一个命令。</li>
 <li><code>:w</code><ul>
 <li>将编辑的数据写入硬盘档案中(常用)</li>
@@ -575,22 +597,22 @@
 <p>注意一下啊，那个惊叹号 (!) 在 vi 当中，常常具有『强制』的意思～</p>
 </blockquote>
 <ul>
-<li>输入模式【编辑模式】<ul>
-<li>进入输入模式(Insert mode)：<ul>
-<li><code>i, I</code><ul>
-<li><code>i</code> 为『从目前光标所在处输入』</li>
-<li><code>I</code> 为『在目前所在行的第一个非空格符处开始输入』。 (常用)</li>
+<li>插入模式【Insert】<ul>
+<li>进入输入模式：<ul>
+<li><code>i, a</code>【insert append】<ul>
+<li><code>i</code> 之前追加</li>
+<li><code>a</code> 之后追加</li>
 </ul>
 </li>
-<li><code>a, A</code><ul>
-<li><code>a</code> 为『从目前光标所在的下一个字符处开始输入』</li>
-<li><code>A</code> 为『从光标所在行的最后一个字符处开始输入』。(常用)</li>
+<li><code>I, A</code><ul>
+<li><code>I</code> 行首插入</li>
+<li><code>A</code> 行尾插入</li>
 </ul>
 </li>
 <li><code>o, O</code><ul>
 <li>这是英文字母 o 的大小写。</li>
-<li><code>o</code> 为在目前光标所在的下一行处输入新的一行</li>
-<li><code>O</code> 为在目前光标所在的上一行处输入新的一行！(常用)</li>
+<li><code>o</code> 下起一行</li>
+<li><code>O</code> 上起一行</li>
 </ul>
 </li>
 <li><code>r, R</code><ul>
@@ -602,52 +624,54 @@
 </li>
 <li>返回了命令模式。<ul>
 <li>在输入模式下按下<code>Esc</code></li>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>可视模式【Visual】<ul>
+<li>进入可视模式(选中模式)：<ul>
+<li><code>v</code>普通选中</li>
+<li><code>V</code>行选中</li>
+<li><code>ctrl+v</code>列选中</li>
+</ul>
+</li>
+<li>返回了命令模式。<ul>
+<li>在输入模式下按下<code>Esc</code><h2 id="备忘单"><a href="#备忘单" class="headerlink" title="备忘单"></a>备忘单</h2></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h2 id="备忘单"><a href="#备忘单" class="headerlink" title="备忘单"></a>备忘单</h2><p><img src="/images/vim.png"></p>
+<p><img src="/images/vim.png"></p>
 <ul>
-<li>动作<ul>
-<li><code>^</code><ul>
-<li>移动到行末首</li>
+<li>移动光标<ul>
+<li><code>hjkl</code><ul>
+<li>左下上右 <a target="_blank" rel="noopener" href="https://catonmat.net/why-vim-uses-hjkl-as-arrow-keys">设计原因</a></li>
 </ul>
 </li>
-<li><code>$</code><ul>
-<li>移动到行末尾</li>
+<li><code>^</code>(<code>$</code>)<ul>
+<li>移动到行末首(行末尾)</li>
 </ul>
 </li>
-<li><code>W,w</code><ul>
-<li>移动到词尾</li>
+<li><code>W</code>,<code>w</code>(<code>b</code>,<code>B</code>)<ul>
+<li>移动到下一单词词头(词尾)</li>
 </ul>
 </li>
-<li><code>-</code><ul>
-<li>移动到前一行行首</li>
+<li><code>-</code>(<code>+</code>)<ul>
+<li>移动到前一行行首(后一行行首)</li>
 </ul>
 </li>
-<li><code>+</code><ul>
-<li>移动到后一行行首</li>
-</ul>
-</li>
-<li><code>{</code><ul>
-<li>移动前一空行（段首）</li>
-</ul>
-</li>
-<li><code>}</code><ul>
-<li>移动到后一空行（段尾）</li>
+<li><code>{</code>(<code>}</code>)<ul>
+<li>移动前一空行【段首】(后一空行【段尾】)</li>
 </ul>
 </li>
 <li><code>M</code><ul>
 <li>移动到屏幕中间行</li>
 </ul>
 </li>
-<li><code>gg</code><ul>
-<li>移动到文件头</li>
-</ul>
-</li>
-<li><code>G</code><ul>
-<li>移动到文件尾</li>
+<li><code>gg</code>(<code>G</code>)<ul>
+<li>移动到文件头(文件尾)</li>
 </ul>
 </li>
 <li>数字+<code>G</code><ul>
@@ -656,29 +680,40 @@
 </li>
 </ul>
 </li>
-<li>命令<ul>
-<li><code>/</code><ul>
-<li>向后搜索</li>
+<li>查找<ul>
+<li><code>/</code>(<code>?</code>)<ul>
+<li>向后搜索(向前搜索)</li>
 </ul>
 </li>
-<li><code>?</code><ul>
-<li>向前搜索</li>
+<li><code>u</code>(<code>ctrl+r</code>)<ul>
+<li>撤销上次操作（反撤销）</li>
 </ul>
 </li>
+</ul>
+</li>
+<li>编辑操作<ul>
 <li><code>yy</code><ul>
 <li>复制本行</li>
 </ul>
 </li>
-<li><code>dd</code>、<code>D</code><ul>
-<li>删除本行</li>
+<li><code>p</code>(<code>P</code>)<ul>
+<li>粘贴至当前行的下一行（上一行)</li>
 </ul>
 </li>
-<li><code>p</code><ul>
-<li>粘贴</li>
+<li><code>dd</code>(<code>D</code>)<ul>
+<li>删除本行(删除当前行留空行）</li>
 </ul>
 </li>
-<li><code>u</code><ul>
-<li>撤销上次操作</li>
+<li><code>x</code><ul>
+<li>删除光标所在的字母</li>
+</ul>
+</li>
+<li><code>r+新字母</code>(<code>R</code>)<ul>
+<li>替换当前字符（一直替换)</li>
+</ul>
+</li>
+<li><code>c</code><ul>
+<li>会删除选中内容，并切换到插入模式</li>
 </ul>
 </li>
 </ul>
