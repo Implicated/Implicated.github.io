@@ -355,7 +355,7 @@ git remote add origin git@user1.github.com:xxx/xxxxx.git<span aria-hidden="true"
       </tags>
   </entry>
   <entry>
-    <title>linux基本命令</title>
+    <title>linux系统命令</title>
     <url>/2021/01/31/linux/</url>
     <content><![CDATA[<p><a href="https://jaywcjlove.gitee.io/linux-command/">命令搜索网站</a></p>
 <a id="more"></a>
@@ -401,11 +401,70 @@ Linux version 4.18.0-193.14.2.el8_2.x86_64 (mockbuild@kbuilder.bsys.centos.org) 
 </ol>
 <h3 id="查看系统位数"><a href="#查看系统位数" class="headerlink" title="查看系统位数"></a>查看系统位数</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">getconf LONG_BIT
 64<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h2 id="yum"><a href="#yum" class="headerlink" title="yum"></a>yum</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="查找软件安装位置"><a href="#查找软件安装位置" class="headerlink" title="查找软件安装位置"></a>查找软件安装位置</h2><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 查找安装包
+<h2 id="yum"><a href="#yum" class="headerlink" title="yum"></a>yum</h2><p>YUM（全称为 Yellow dog Updater,Modified）是一个在Fedora和RedHat以及CentOS中的Shell前端软件包管理器。基于RPM包管理。所以用yum安装，实质上是用RPM安装</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 安装
+yum install              #全部安装
+yum install package1     #安装指定的安装包package1
+yum groupinsall group1   #安装程序组group1
+
+# 更新和升级
+yum update               #全部更新
+yum update package1      #更新指定程序包package1
+yum check-update         #检查可更新的程序
+yum upgrade package1     #升级指定程序包package1
+yum groupupdate group1   #升级程序组group1
+
+# 查找
+yum list installed | grep mysql
+yum list installed mysql*
+
+# 显示
+yum info package1      #显示安装包信息package1
+yum list               #显示所有已经安装和可以安装的程序包
+yum list package1      #显示指定程序包安装情况package1
+yum groupinfo group1   #显示程序组group1信息yum search string 根据关键字string查找安装包
+
+# 删除程序
+yum remove &amp;#124; erase package1   #删除程序包package1
+yum groupremove group1             #删除程序组group1
+yum deplist package1               #查看程序package1依赖情况
+
+# 清除缓存
+yum clean packages       #清除缓存目录下的软件包
+yum clean headers        #清除缓存目录下的 headers
+yum clean oldheaders     #清除缓存目录下旧的 headers<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="查找软件安装位置"><a href="#查找软件安装位置" class="headerlink" title="查找软件安装位置"></a>查找软件安装位置</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 查找安装包
 rpm -qa|grep redis 
 # 查找安装包
 rpm -ql [安装包名字]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<table>
+<thead>
+<tr>
+<th align="left">Directory</th>
+<th align="left">Contents of Directory</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"></td>
+<td align="left">一些配置文件的目录，例如/etc/init.d/mysql</td>
+</tr>
+<tr>
+<td align="left">/usr/bin</td>
+<td align="left">一些可执行文件</td>
+</tr>
+<tr>
+<td align="left">/usr/lib</td>
+<td align="left">一些程序使用的动态函数库</td>
+</tr>
+<tr>
+<td align="left">/usr/share/doc</td>
+<td align="left">一些基本的软件使用手册与帮助文档</td>
+</tr>
+<tr>
+<td align="left">/usr/share/man</td>
+<td align="left">一些man page文件</td>
+</tr>
+</tbody></table>
 ]]></content>
       <categories>
         <category>ops</category>
@@ -3350,7 +3409,7 @@ select 1 #选择第一个数据库，Redis默认有16个，集群默认使用第
         <category>be</category>
       </categories>
       <tags>
-        <tag>java</tag>
+        <tag>Java</tag>
       </tags>
   </entry>
   <entry>
@@ -3425,6 +3484,7 @@ select 1 #选择第一个数据库，Redis默认有16个，集群默认使用第
         <category>note</category>
       </categories>
       <tags>
+        <tag>Java</tag>
         <tag>Maven</tag>
       </tags>
   </entry>
@@ -3447,6 +3507,7 @@ npm config set registry https://registry.npmjs.org<span aria-hidden="true" class
         <category>tool</category>
       </categories>
       <tags>
+        <tag>Linux</tag>
         <tag>Mirror</tag>
       </tags>
   </entry>
@@ -3467,11 +3528,11 @@ npm config set cache "E://nodejs/node_cache"<span aria-hidden="true" class="line
         <category>fe</category>
       </categories>
       <tags>
-        <tag>js</tag>
+        <tag>NodeJS</tag>
       </tags>
   </entry>
   <entry>
-    <title>常用的linux命令</title>
+    <title>常用的linux命令收集</title>
     <url>/2021/04/27/linux-ctl/</url>
     <content><![CDATA[<p><a href="https://jaywcjlove.gitee.io/linux-command/">命令搜索网站</a></p>
 <a id="more"></a>
@@ -3513,7 +3574,7 @@ ps -ef|grep weblogic|grep -v grep<span aria-hidden="true" class="line-numbers-ro
       </tags>
   </entry>
   <entry>
-    <title>reg</title>
+    <title>windows注册表</title>
     <url>/2021/04/29/reg/</url>
     <content><![CDATA[<p>windows注册表</p>
 <a id="more"></a>
@@ -3583,6 +3644,12 @@ ps -ef|grep weblogic|grep -v grep<span aria-hidden="true" class="line-numbers-ro
 @="\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -windowstyle hidden -Command $stpath = pwd; Start-Process PowerShell -ArgumentList \\\"-NoExit\\\", \\\"-Command Set-Location -literalPath '%V'\\\" -verb RunAs"
 
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      <categories>
+        <category>ops</category>
+      </categories>
+      <tags>
+        <tag>Windows</tag>
+      </tags>
   </entry>
   <entry>
     <title>Clash配置详解</title>
@@ -4080,6 +4147,216 @@ ps -ef|grep weblogic|grep -v grep<span aria-hidden="true" class="line-numbers-ro
       </categories>
       <tags>
         <tag>GFW</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Apache http server安装</title>
+    <url>/2021/06/02/httpd/</url>
+    <content><![CDATA[<p>Apache http server安装</p>
+<a id="more"></a>
+
+<hr>
+<h3 id="安装httpd"><a href="#安装httpd" class="headerlink" title="安装httpd"></a>安装httpd</h3><pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 安装httpd
+sudo yum install httpd
+# 配置开机自启
+sudo systemctl enable httpd
+# 启动httpd
+sudo systemctl start httpd
+# 查看httpd运行状态
+sudo systemctl status httpd
+
+# 重新加载httpd配置文件，修改配置文件后必须执行才能生效
+sudo systemctl reload httpd
+# 停止httpd，快速关闭不管有没有正在处理的请求
+sudo systemctl stop httpd
+# 重启httpd
+sudo systemctl restart httpd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="配置httpd"><a href="#配置httpd" class="headerlink" title="配置httpd"></a>配置httpd</h3><ul>
+<li>修改端口<ul>
+<li>修改<code>/etc/httpd/conf/ttpd.conf</code>中`Listen’</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用httpd"><a href="#使用httpd" class="headerlink" title="使用httpd"></a>使用httpd</h3><ul>
+<li>把文件丢到<code>/var/www/html/</code>目录下即可</li>
+<li>默认访问地址为<code>机器ip:80</code></li>
+</ul>
+]]></content>
+      <categories>
+        <category>ops</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用nginx反代不同子域名到本机不同端口</title>
+    <url>/2021/06/02/nginx/</url>
+    <content><![CDATA[<p>使用nginx反代不同子域名到本机不同端口</p>
+<a id="more"></a>
+
+<hr>
+<h3 id="配置DNS解析"><a href="#配置DNS解析" class="headerlink" title="配置DNS解析"></a>配置DNS解析</h3><p>DNS解析是配置域名和ip的关系，与端口无关</p>
+<ul>
+<li>有备案域名<ul>
+<li>在阿里云域名解析中配置自己到二级域名</li>
+<li>记录类型选择<code>A记录</code>，主机记录填写<code>自己定义的二级域名</code>，记录值填写<code>自己的主机地址</code></li>
+<li>注意：DNS解析存在TTL时间，修改后可能不会立即生效</li>
+</ul>
+</li>
+<li>无备案域名<ul>
+<li>修改本机host文件<ul>
+<li>Windows：<code>C:\windows\system32\drivers\etc</code></li>
+<li>Linux：<code>/etc/hosts</code></li>
+<li>MacOS：<code>/etc/hosts</code></li>
+</ul>
+</li>
+<li>将<code>自己定义的二级域名</code>都映射到<code>127.0.0.1</code></li>
+<li>刷新DNS<ul>
+<li>Windows：<code>ipconfig /flushdns</code></li>
+<li>Linux：<code>systemctl restart nscd</code></li>
+<li>MacOS：<code>sudo killall -HUP mDNSResponder</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="配置nginx"><a href="#配置nginx" class="headerlink" title="配置nginx"></a>配置nginx</h3><ul>
+<li>安装nginx和配置自启动</li>
+</ul>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 安装nginx
+sudo yum install nginx
+# 配置开机自启
+sudo systemctl enable nginx
+# 启动nginx
+sudo systemctl start nginx
+# 查看nginx运行状态
+sudo systemctl status nginx
+# 可选，防火墙放行http和https（如果是云主机到话，请自行在安全组中开启）
+sudo firewall-cmd --permanent --zone=public --add-service=http
+sudo firewall-cmd --permanent --zone=public --add-service=https
+sudo firewall-cmd --reload
+
+# 重新加载nginx配置文件，修改配置文件后必须执行才能生效
+nginx -s reload
+# 停止nginx，快速关闭不管有没有正在处理的请求
+nginx -s stop
+# 停止nginx，退出前完成已经接受的连接请求
+nginx -s quit
+# 重启nginx
+nginx -s reopen
+# 检查配置文件是否有错
+nginx -t<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><p>配置反代<br>nginx到主配置文件默认在<code>/etc/nginx/nginx.conf</code>下，通过<code>include</code>引入了俩个位置到配置文件位置，俩个<code>include</code>分别在<code>http</code>标签和<code>server</code>标签下</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># http下
+include             /etc/nginx/mime.types;
+# server下
+include /etc/nginx/default.d/*.conf;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>在<code>/etc/nginx/default.d/</code>下新增以<code>.conf</code>后缀的文件，内容如下</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">server {
+  listen       80;
+  server_name  abc.test.com;
+
+  location / {
+    proxy_pass  http://127.0.0.1:xxxx; # 转发规则
+    proxy_set_header Host $proxy_host; # 修改转发请求头，让xxxx端口的应用可以受到真实的请求
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  }
+}
+
+server {
+  listen       80;
+  server_name  def.test.com;
+
+  location / {
+    proxy_pass  http://127.0.0.1:yyyy; # 转发规则
+    proxy_set_header Host $proxy_host; # 修改转发请求头，让yyyy端口的应用可以受到真实的请求
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  }
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="配置gitlab使用外部nginx"><a href="#配置gitlab使用外部nginx" class="headerlink" title="配置gitlab使用外部nginx"></a>配置gitlab使用外部nginx</h3></li>
+<li><p>修改GitLab的<code>github.rb</code>配置文件</p>
+</li>
+</ul>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">1295 # add by fc
+1296 web_server['external_users'] = ['nginx','root']
+1297 web_server['username'] = 'nginx'
+1298 web_server['group'] = 'nginx'
+1299 
+1300 # web_server['external_users'] = []
+1301 # web_server['username'] = 'gitlab-www'
+1302 # web_server['group'] = 'gitlab-www'
+1303 # web_server['uid'] = nil
+1304 # web_server['gid'] = nil
+1305 # web_server['shell'] = '/bin/false'
+1306 # web_server['home'] = '/var/opt/gitlab/nginx'
+
+1313 # add by fc
+1314 nginx['enable'] = false
+1315 
+1316 # nginx['enable'] = true
+1317 # nginx['client_max_body_size'] = '250m'
+1318 # nginx['redirect_http_to_https'] = false
+1319 # nginx['redirect_http_to_https_port'] = 80<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><p>配置GitLab的Nginx配置文件</p>
+<ul>
+<li><p>下载nginx的gitlab配置模板文件。<a href="https://gitlab.com/gitlab-org/gitlab-recipes/tree/master/web-server/nginx">下载地址</a></p>
+</li>
+<li><p>将<code>gitlab-omnibus-nginx.conf</code>移动到<code>/etc/nginx/conf.d</code>目录</p>
+</li>
+<li><p>修改YOUR_SERVER_FQDN为自己的域名</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">34   server_name YOUR_SERVER_FQDN; ## Replace this with something like gitlab.example.com  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>禁用<code>/etc/nginx/nginx.conf</code>中的默认的80端口的server配置，</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 注释掉38～57行
+sed -i "38,57s@^@# @g" /etc/nginx/nginx.conf`
+# 结果
+38 #     server {
+39 #         listen       80 default_server;
+40 #         listen       [::]:80 default_server;
+41 #         server_name  _;
+42 #         root         /usr/share/nginx/html;
+43 # 
+44 #         # Load configuration files for the default server block.
+45 #         include /etc/nginx/default.d/*.conf;
+46 # 
+47 #         location / {
+48 #         }
+49 # 
+50 #         error_page 404 /404.html;
+51 #         location = /404.html {
+52 #         }
+53 # 
+54 #         error_page 500 502 503 504 /50x.html;
+55 #         location = /50x.html {
+56 #         }
+57 #     }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+</li>
+<li><p>加载配置</p>
+</li>
+</ul>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"># 测试nginx文件是否正确，出现`test is successful`说明成功
+nginx -t
+# 刷新gitlab配置，出现`gitlab Reconfigured!`说明成功
+gitlab-ctl reconfigure<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>启动服务</li>
+</ul>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">systemctl start gitlab-runsvdir
+gitlab-ctl start
+systemctl start nginx
+netstat -tunlp|grep nginx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>ops</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -5034,7 +5311,7 @@ ps -ef|grep weblogic|grep -v grep<span aria-hidden="true" class="line-numbers-ro
       </tags>
   </entry>
   <entry>
-    <title>ios</title>
+    <title>更好的使用IOS</title>
     <url>/2021/04/29/ios/</url>
     <content><![CDATA[<p>更好的使用IOS</p>
 <a id="more"></a>
@@ -5970,5 +6247,11 @@ END:DAYLIGHT
 END:VTIMEZONE
 END:VCALENDAR
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      <categories>
+        <category>tool</category>
+      </categories>
+      <tags>
+        <tag>Apple</tag>
+      </tags>
   </entry>
 </search>
